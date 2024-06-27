@@ -5,8 +5,8 @@ import LoginTextcontainer from '../components/LoginPage/LoginText/LoginTextconta
 
 const LoginPage = () => {
   return (
-    <div className="flex items-center justify-center w-screen h-screen bg-[#FFFFFF] ">
-      <div className="w-[1180px] h-[840px] rounded-lg flex shadow-md">
+    <div className="flex items-center justify-center w-screen h-screen">
+      <div className="w-[1180px] h-[840px] rounded-lg flex shadow-md bg-[#FBFBFB]">
         <div className="w-[600px] h-full flex items-center justify-center">
           <img
             src={Logo}
