@@ -3,6 +3,99 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      fontFamily: {
+        pretandard: ['Pretendard', 'sans-serif']
+      },
+      fontSize: {
+        'heading-1': [
+          '96px',
+          {
+            lineHeight: '140%',
+            letterSpacing: '-1.25%',
+            fontWeight: '300'
+          }
+        ],
+        'heading-2': [
+          '60px',
+          {
+            lineHeight: '140%',
+            letterSpacing: '-0.5%',
+            fontWeight: '300'
+          }
+        ],
+        'heading-3': [
+          '48px',
+          {
+            lineHeight: '140%',
+            letterSpacing: '0%',
+            fontWeight: '400'
+          }
+        ],
+        'subtitle-1': [
+          '34px',
+          {
+            lineHeight: '140%',
+            letterSpacing: '0.25%',
+            fontWeight: '300'
+          }
+        ],
+        'subtitle-2': [
+          '24px',
+          {
+            lineHeight: '140%',
+            letterSpacing: '0%',
+            fontWeight: '500'
+          }
+        ],
+        'subtitle-3': [
+          '20px',
+          {
+            lineHeight: '140%',
+            letterSpacing: '0%',
+            fontWeight: '700'
+          }
+        ],
+        body: [
+          '16px',
+          {
+            lineHeight: '140%',
+            letterSpacing: '0%',
+            fontWeight: '400'
+          }
+        ],
+        button: [
+          '14px',
+          {
+            lineHeight: '140%',
+            letterSpacing: '1.25%',
+            fontWeight: '500'
+          }
+        ],
+        caption: [
+          '12px',
+          {
+            lineHeight: '140%',
+            letterSpacing: '0.4%',
+            fontWeight: '400'
+          }
+        ],
+        overline: [
+          '12px',
+          {
+            lineHeight: '140%',
+            letterSpacing: '1.5%',
+            fontWeight: '300'
+          }
+        ],
+        calendar: [
+          '10px',
+          {
+            lineHeight: '140%',
+            letterSpacing: '0%',
+            fontWeight: '500'
+          }
+        ]
+      },
       colors: {
         primary: {
           //주요 색상
