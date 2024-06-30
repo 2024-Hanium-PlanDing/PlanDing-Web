@@ -7,8 +7,8 @@ import LoginTextcontainer from '../components/LoginPage/LoginText/LoginTextconta
 const LoginPage = () => {
   const nav = useNavigate()
   return (
-    <div className="flex items-center justify-center w-screen h-screen">
-      <div className="w-[1180px] h-[840px] rounded-lg flex shadow-md bg-[#FBFBFB]">
+    <div className="flex items-center justify-center w-screen h-screen bg-[#F5F5FD]">
+      <div className="w-[1180px] h-[840px] rounded-lg flex shadow-md bg-[#FFFFFF]">
         <div className="w-[600px] h-full flex items-center justify-center">
           <img
             src={Logo}

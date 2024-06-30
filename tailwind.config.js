@@ -145,7 +145,7 @@ export default {
           400: '#9e3f3f',
           500: '#893737'
         },
-        neutral: {
+        neutrals: {
           //배경과 텍스트 색상
           0: '#ffffff',
           10: '#fbfbfc',

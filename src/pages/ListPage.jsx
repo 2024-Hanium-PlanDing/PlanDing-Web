@@ -6,7 +6,7 @@ import MainContentContainer from '../components/ListPage/MainContent/MainContent
 const ListPage = () => {
   const nav = useNavigate()
   return (
-    <div className="flex items-center justify-center w-screen h-screen">
+    <div className="flex items-center justify-center w-screen h-screen bg-[#F6F6F6]">
       <div
         className="flex gap-2.5"
         onClick={() => {
