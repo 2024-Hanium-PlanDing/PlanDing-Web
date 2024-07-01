@@ -1,6 +1,6 @@
 import LoginBtn from './atom/LoginBtn'
 
-const LoginBtnContainer = () => {
+const LoginBtnContainer = ({ kakaoLogin }) => {
   return (
     <div className="flex flex-col gap-5">
       <LoginBtn
@@ -19,9 +19,10 @@ const LoginBtnContainer = () => {
         <div className="flex-grow border-t border-gray-300"></div>
       </div>
       <LoginBtn
-        text="Login"
+        text="KaKao"
         bgColor="bg-[#FFE20A]"
         textColor="text-neutrals-600"
+        onClick={kakaoLogin}
       />
     </div>
   )

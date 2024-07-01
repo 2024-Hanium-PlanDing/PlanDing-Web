@@ -4,6 +4,7 @@ import ListPage from './pages/ListPage'
 import PersonalPage from './pages/PersonalPage'
 import GroupPage from './pages/GroupPage'
 import './App.css'
+import LoginProgressPage from './pages/LoginProgressPage'
 
 function App() {
   return (
@@ -13,6 +14,10 @@ function App() {
           <Route
             path="/"
             element={<LoginPage />}
+          />
+          <Route
+            path="/loginProgressPage"
+            element={<LoginProgressPage />}
           />
           <Route
             path="/list"
