@@ -15,8 +15,8 @@ const ListPage = () => {
           nav(`/personal`)
         }}>
         <FavoritesContainer />
-        <MainContentContainer userInfo={userInfo} />
-        <InformationContainer />
+        <MainContentContainer />
+        <InformationContainer userInfo={userInfo} />
       </div>
     </div>
   )

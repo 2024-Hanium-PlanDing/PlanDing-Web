@@ -7,9 +7,9 @@ const MainContentContainer = () => {
     <div className="w-[1012px] h-[848px] rounded-lg shadow-md p-5 border border-black">
       <div className="border border-black w-full h-full flex flex-col">
         <MainTitle />
-        <SubTitle />
+        <SubTitle text="My Plan" />
         <ItemContainer />
-        <SubTitle />
+        <SubTitle text="Team Plan" />
         <ItemContainer />
       </div>
     </div>

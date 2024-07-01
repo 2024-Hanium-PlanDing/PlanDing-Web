@@ -8,7 +8,8 @@ export const UserInfo = token => async dispatch => {
         Authorization: `Bearer ${token}`
       }
     })
-    dispatch(userInfo(response.data))
+
+    dispatch(userInfo(response.data.data))
   } catch (error) {
     console.error('Error fetching user info:', error)
     throw error
