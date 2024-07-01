@@ -1,0 +1,16 @@
+import basicApi from '../index'
+import { userInfo } from '../../redux/modules/userReducer'
+
+export const UserInfo = token => async dispatch => {
+  try {
+    const response = await basicApi.get(`/api/v1/profile`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    dispatch(userInfo(response.data))
+  } catch (error) {
+    console.error('Error fetching user info:', error)
+    throw error
+  }
+}
