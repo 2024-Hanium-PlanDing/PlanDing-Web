@@ -5,11 +5,13 @@ import PersonalPage from './pages/PersonalPage'
 import GroupPage from './pages/GroupPage'
 import './App.css'
 import LoginProgressPage from './pages/LoginProgressPage'
+import CreateGroupModal from './components/Modal/CreateGroupModal/CreateGroupModal'
 
 function App() {
   return (
     <div>
       <BrowserRouter>
+        <CreateGroupModal />
         <Routes>
           <Route
             path="/"

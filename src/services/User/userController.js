@@ -1,5 +1,5 @@
 import basicApi from '../index'
-import { userInfo } from '../../redux/modules/userReducer'
+import { setToken, userInfo } from '../../redux/modules/userReducer'
 
 export const UserInfo = token => async dispatch => {
   try {
@@ -10,6 +10,7 @@ export const UserInfo = token => async dispatch => {
     })
 
     dispatch(userInfo(response.data.data))
+    dispatch(setToken(token))
   } catch (error) {
     console.error('Error fetching user info:', error)
     throw error

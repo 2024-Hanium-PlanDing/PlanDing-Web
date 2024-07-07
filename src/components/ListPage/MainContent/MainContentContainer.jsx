@@ -2,7 +2,7 @@ import ItemContainer from './ItemContainer'
 import MainTitle from './atom/MainTitle'
 import SubTitle from './atom/SubTitle'
 
-const MainContentContainer = () => {
+const MainContentContainer = ({ openModal }) => {
   return (
     <div className="w-[1012px] h-[848px] rounded-lg shadow-md p-5 border border-black">
       <div className="border border-black w-full h-full flex flex-col">
@@ -10,7 +10,7 @@ const MainContentContainer = () => {
         <SubTitle text="My Plan" />
         <ItemContainer />
         <SubTitle text="Team Plan" />
-        <ItemContainer />
+        <ItemContainer openModal={openModal} />
       </div>
     </div>
   )
