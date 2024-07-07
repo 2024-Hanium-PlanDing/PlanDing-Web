@@ -1,13 +1,13 @@
 const SET_GROUP = 'SET_GROUP'
-const ADD_GROUP = 'ADD_GROUP'
+const CREATE_GROUP = 'CREATE_GROUP'
 
 export const setGroup = group => ({
   type: SET_GROUP,
   payload: group
 })
 
-export const addGroup = title => ({
-  type: ADD_GROUP,
+export const createGroup = title => ({
+  type: CREATE_GROUP,
   payload: title
 })
 
@@ -24,7 +24,7 @@ const groupReducer = (state = initialState, action) => {
         ...state,
         groups: action.payload
       }
-    case ADD_GROUP:
+    case CREATE_GROUP:
       return {
         ...state,
         groups: {

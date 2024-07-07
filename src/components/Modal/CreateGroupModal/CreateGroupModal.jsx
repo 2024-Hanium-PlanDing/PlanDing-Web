@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import ThumbnailSvg from '../../../assets/thumbnail.svg'
 import { closeModal } from '../../../redux/modules/modalReducer'
 import { useState } from 'react'
-import { CreateGroup } from '../../../services/Group/groupController'
+import { createGroupList } from '../../../services/Group/groupController'
 
 const CreateGroupModal = () => {
   const dispatch = useDispatch()
@@ -19,7 +19,9 @@ const CreateGroupModal = () => {
   const handleSubmit = async () => {
     if (file) {
       try {
-        await dispatch(CreateGroup(userInfo.token, title, description, file))
+        await dispatch(
+          createGroupList(userInfo.token, title, description, file)
+        )
         dispatch(closeModal())
         setTitle('')
         setDescription('')
