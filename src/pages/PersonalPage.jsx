@@ -8,14 +8,16 @@ const PersonalPage = () => {
     title: '',
     content: '',
     startTime: null,
-    endTime: null
+    endTime: null,
+    days: null
   })
   const resetData = () => {
     setScheduleData({
       title: '',
       content: '',
       startTime: null,
-      endTime: null
+      endTime: null,
+      days: null
     })
   }
 
@@ -27,7 +29,13 @@ const PersonalPage = () => {
         name === 'startTime' || name === 'endTime' ? parseInt(value, 10) : value
     }))
   }
-
+  const onChangeDate = date => {
+    setScheduleData(prevState => ({
+      ...prevState,
+      days: date
+    }))
+  }
+  console.log(scheduleData)
   return (
     <div className="flex items-center justify-center w-screen h-screen bg-[#F6F6F6]">
       <div className="flex gap-2.5">
@@ -36,6 +44,7 @@ const PersonalPage = () => {
         <InformationContainer
           scheduleData={scheduleData}
           onChangeData={onChangeData}
+          onChangeDate={onChangeDate}
           resetData={resetData}
         />
       </div>

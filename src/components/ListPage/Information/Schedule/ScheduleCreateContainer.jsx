@@ -1,7 +1,13 @@
+import DatePickerCalendar from './atom/DatePickerCalendar'
 import ScheduleBtn from './atom/ScheduleBtn'
 import SelectTimeContainer from './SelectTimeContainer'
 
-const ScheduleCreateContainer = ({ scheduleData, onChangeData, resetData }) => {
+const ScheduleCreateContainer = ({
+  scheduleData,
+  onChangeData,
+  resetData,
+  onChangeDate
+}) => {
   return (
     <div className="w-[280px] h-[373px] border-[2px] border-primary-75 rounded-md flex flex-col items-center bg-white">
       <input
@@ -23,6 +29,11 @@ const ScheduleCreateContainer = ({ scheduleData, onChangeData, resetData }) => {
         scheduleData={scheduleData}
         onChangeData={onChangeData}
       />
+      <DatePickerCalendar
+        value={scheduleData.days}
+        onChange={onChangeDate}
+      />
+
       <div className="flex gap-3">
         <ScheduleBtn
           bgColor="bg-primary-200"
