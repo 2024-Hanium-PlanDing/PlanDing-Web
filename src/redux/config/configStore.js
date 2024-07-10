@@ -3,11 +3,13 @@ import { thunk } from 'redux-thunk'
 import userReducer from '../modules/userReducer'
 import modalReducer from '../modules/modalReducer'
 import groupReducer from '../modules/groupReducer'
+import personalReducer from '../modules/\bpersonalReducer'
 
 const rootReducer = combineReducers({
   user: userReducer,
   modal: modalReducer,
-  group: groupReducer
+  group: groupReducer,
+  personal: personalReducer
 })
 
 const store = createStore(

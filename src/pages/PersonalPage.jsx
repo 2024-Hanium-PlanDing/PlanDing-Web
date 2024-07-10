@@ -1,15 +1,24 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import FavoritesContainer from '../components/ListPage/Favorites/FavoritesContainer'
 import InformationContainer from '../components/ListPage/Information/InformationContainer'
 import PersonalContainer from '../components/PersonalPage/PersonalContainer'
+import {
+  postPersonalSchedule,
+  getPersonalSchedule
+} from '../services/Personal/personalController'
+import { useDispatch, useSelector } from 'react-redux'
 
 const PersonalPage = () => {
+  const token = useSelector(state => state.user.token)
+  const dispatch = useDispatch()
+  const scheduleList = useSelector(state => state.personal.persnoalSchedule)
+
   const [scheduleData, setScheduleData] = useState({
     title: '',
     content: '',
     startTime: null,
     endTime: null,
-    days: null
+    scheduleDate: null
   })
   const resetData = () => {
     setScheduleData({
@@ -17,9 +26,13 @@ const PersonalPage = () => {
       content: '',
       startTime: null,
       endTime: null,
-      days: null
+      scheduleDate: null
     })
   }
+
+  useEffect(() => {
+    dispatch(getPersonalSchedule(token))
+  }, [token])
 
   const onChangeData = e => {
     const { name, value } = e.target
@@ -32,10 +45,20 @@ const PersonalPage = () => {
   const onChangeDate = date => {
     setScheduleData(prevState => ({
       ...prevState,
-      days: date
+      scheduleDate: date
     }))
   }
-  console.log(scheduleData)
+  const createSchedule = () => {
+    dispatch(postPersonalSchedule(token, scheduleData))
+    setScheduleData({
+      title: '',
+      content: '',
+      startTime: null,
+      endTime: null,
+      scheduleDate: null
+    })
+  }
+
   return (
     <div className="flex items-center justify-center w-screen h-screen bg-[#F6F6F6]">
       <div className="flex gap-2.5">
@@ -46,6 +69,7 @@ const PersonalPage = () => {
           onChangeData={onChangeData}
           onChangeDate={onChangeDate}
           resetData={resetData}
+          createSchedule={createSchedule}
         />
       </div>
     </div>

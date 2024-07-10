@@ -6,7 +6,8 @@ const ScheduleCreateContainer = ({
   scheduleData,
   onChangeData,
   resetData,
-  onChangeDate
+  onChangeDate,
+  createSchedule
 }) => {
   return (
     <div className="w-[280px] h-[373px] border-[2px] border-primary-75 rounded-md flex flex-col items-center bg-white">
@@ -30,7 +31,7 @@ const ScheduleCreateContainer = ({
         onChangeData={onChangeData}
       />
       <DatePickerCalendar
-        value={scheduleData.days}
+        value={scheduleData.scheduleDate}
         onChange={onChangeDate}
       />
 
@@ -38,6 +39,7 @@ const ScheduleCreateContainer = ({
         <ScheduleBtn
           bgColor="bg-primary-200"
           text="생성하기"
+          onClickEvent={createSchedule}
         />
         <ScheduleBtn
           bgColor=""

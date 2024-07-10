@@ -7,7 +7,8 @@ const InformationContainer = ({
   scheduleData,
   onChangeData,
   resetData,
-  onChangeDate
+  onChangeDate,
+  createSchedule
 }) => {
   const path = window.location.pathname
 
@@ -22,6 +23,7 @@ const InformationContainer = ({
           onChangeData={onChangeData}
           onChangeDate={onChangeDate}
           resetData={resetData}
+          createSchedule={createSchedule}
         />
       )}
     </div>
