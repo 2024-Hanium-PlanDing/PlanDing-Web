@@ -30,7 +30,7 @@ function App() {
             element={<PersonalPage />}
           />
           <Route
-            path="/group"
+            path="/group/:code"
             element={<GroupPage />}
           />
         </Routes>
