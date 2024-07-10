@@ -3,16 +3,28 @@ import InformationContainer from '../components/ListPage/Information/Information
 import MainContentContainer from '../components/ListPage/MainContent/MainContentContainer'
 import { useDispatch, useSelector } from 'react-redux'
 import { openModal } from '../redux/modules/modalReducer'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { setGroupList } from '../services/Group/groupController'
 
 const ListPage = () => {
   const userInfo = useSelector(state => state.user)
   const dispatch = useDispatch()
   const groupData = useSelector(state => state.group.groups)
-
+  const [scheduleData, setScheduleData] = useState({
+    title: '',
+    content: '',
+    startTime: '',
+    endTime: ''
+  })
   const openModalHandle = () => {
     dispatch(openModal())
+  }
+  const onChangeData = e => {
+    const { name, value } = e.target
+    setScheduleData(prevState => ({
+      ...prevState,
+      [name]: value
+    }))
   }
 
   useEffect(() => {
@@ -26,7 +38,10 @@ const ListPage = () => {
           openModal={openModalHandle}
           groupData={groupData?.data}
         />
-        <InformationContainer userInfo={userInfo.user} />
+        <InformationContainer
+          scheduleData={scheduleData}
+          onChangeData={onChangeData}
+        />
       </div>
     </div>
   )
