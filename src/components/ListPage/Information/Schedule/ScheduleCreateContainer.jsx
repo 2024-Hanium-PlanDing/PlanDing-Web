@@ -1,6 +1,7 @@
+import ScheduleBtn from './atom/ScheduleBtn'
 import SelectTimeContainer from './SelectTimeContainer'
 
-const ScheduleCreateContainer = ({ scheduleData, onChangeData }) => {
+const ScheduleCreateContainer = ({ scheduleData, onChangeData, resetData }) => {
   return (
     <div className="w-[280px] h-[373px] border-[2px] border-primary-75 rounded-md flex flex-col items-center bg-white">
       <input
@@ -20,8 +21,19 @@ const ScheduleCreateContainer = ({ scheduleData, onChangeData }) => {
       />
       <SelectTimeContainer
         scheduleData={scheduleData}
-        onchange={onChangeData}
+        onChangeData={onChangeData}
       />
+      <div className="flex gap-3">
+        <ScheduleBtn
+          bgColor="bg-primary-200"
+          text="생성하기"
+        />
+        <ScheduleBtn
+          bgColor=""
+          text="취소하기"
+          onClickEvent={resetData}
+        />
+      </div>
     </div>
   )
 }

@@ -3,7 +3,7 @@ import TodayListContainer from './TodayList/TodayListContainer'
 import UserInfoContainer from './UserCard/UserInfoContainer'
 import Calendar from './atom/Calendar'
 
-const InformationContainer = ({ scheduleData, onChangeData }) => {
+const InformationContainer = ({ scheduleData, onChangeData, resetData }) => {
   const path = window.location.pathname
 
   return (
@@ -15,6 +15,7 @@ const InformationContainer = ({ scheduleData, onChangeData }) => {
         <ScheduleCreateContainer
           scheduleData={scheduleData}
           onChangeData={onChangeData}
+          resetData={resetData}
         />
       )}
     </div>

@@ -3,7 +3,7 @@ import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
 
-export default function SelectTimeContainer({ scheduleData, onchange }) {
+export default function SelectTimeContainer({ scheduleData, onChangeData }) {
   const createTimeOptions = (start, end, exclude) => {
     const options = []
     for (let i = start; i <= end; i++) {
@@ -31,9 +31,9 @@ export default function SelectTimeContainer({ scheduleData, onchange }) {
         <Select
           labelId="demo-simple-select-standard-label-startTime"
           id="demo-simple-select-standard-startTime"
-          value={scheduleData?.startTime}
+          value={scheduleData?.startTime || ''}
           name="startTime"
-          onChange={onchange}
+          onChange={onChangeData}
           label="startTime">
           {createTimeOptions(6, 23, scheduleData?.endTime)}
         </Select>
@@ -47,11 +47,11 @@ export default function SelectTimeContainer({ scheduleData, onchange }) {
         <Select
           labelId="demo-simple-select-standard-label-endTime"
           id="demo-simple-select-standard-endTime"
-          value={scheduleData?.endTime}
-          onChange={onchange}
+          value={scheduleData?.endTime || ''}
+          onChange={onChangeData}
           name="endTime"
           label="endTime">
-          {createTimeOptions(6, 23, scheduleData?.endTime)}
+          {createTimeOptions(6, 23, scheduleData?.startTime)}
         </Select>
       </FormControl>
     </div>
