@@ -2,7 +2,7 @@ import basicApi from '..'
 import {
   createPersonalSchedule,
   setPersonalSchedule
-} from '../../redux/modules/\bpersonalReducer'
+} from '../../redux/modules/personalReducer'
 
 export const postPersonalSchedule = (token, scheduleData) => async dispatch => {
   try {

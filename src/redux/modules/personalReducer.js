@@ -1,9 +1,9 @@
 const SET_PERSONAL_SCHEDULE = 'SET_PERSONAL_SCHEDULE'
 const CREATE_PERSONAL_SCHEDULE = 'CREATE_PERSONAL_SCHEDULE'
 
-export const setPersonalSchedule = group => ({
+export const setPersonalSchedule = data => ({
   type: SET_PERSONAL_SCHEDULE,
-  payload: group
+  payload: data
 })
 
 export const createPersonalSchedule = data => ({

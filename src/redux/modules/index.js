@@ -2,13 +2,15 @@ import { combineReducers } from 'redux'
 import user from './userReducer'
 import modal from './modalReducer'
 import group from './groupReducer'
-import personal from './\bpersonalReducer'
+import personal from './personalReducer'
+import date from './calendarReducer'
 
 const rootReducer = combineReducers({
   user,
   modal,
   group,
-  personal
+  personal,
+  date
 })
 
 export default rootReducer

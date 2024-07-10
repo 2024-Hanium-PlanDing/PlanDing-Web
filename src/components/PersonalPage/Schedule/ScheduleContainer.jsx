@@ -2,7 +2,6 @@ import { useState } from 'react'
 
 const ScheduleContainer = () => {
   const [schedule, setSchedule] = useState([])
-
   const days = [
     '일요일',
     '월요일',
