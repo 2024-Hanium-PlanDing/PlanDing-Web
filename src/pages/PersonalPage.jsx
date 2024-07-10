@@ -13,8 +13,6 @@ const PersonalPage = () => {
   const dispatch = useDispatch()
   const scheduleList = useSelector(state => state.personal.persnoalSchedule)
   const weekData = useSelector(state => state.date)
-  console.log(weekData)
-  console.log(scheduleList)
 
   const [scheduleData, setScheduleData] = useState({
     title: '',
@@ -66,7 +64,10 @@ const PersonalPage = () => {
     <div className="flex items-center justify-center w-screen h-screen bg-[#F6F6F6]">
       <div className="flex gap-2.5">
         <FavoritesContainer />
-        <PersonalContainer weekData={weekData} />
+        <PersonalContainer
+          weekData={weekData}
+          scheduleList={scheduleList}
+        />
         <InformationContainer
           scheduleData={scheduleData}
           onChangeData={onChangeData}

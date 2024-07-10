@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react'
 
-const ScheduleContainer = ({ weekData }) => {
+const ScheduleContainer = ({ weekData, scheduleList }) => {
   const [schedule, setSchedule] = useState([])
   const [weekDates, setWeekDates] = useState([])
-  console.log(setSchedule)
-
   const days = [
     '일요일',
     '월요일',
@@ -28,6 +26,35 @@ const ScheduleContainer = ({ weekData }) => {
       setWeekDates(dates)
     }
   }, [weekData])
+
+  useEffect(() => {
+    if (scheduleList && Array.isArray(scheduleList.data)) {
+      const newSchedule = Array(19)
+        .fill(null)
+        .map(() => Array(7).fill(null))
+
+      scheduleList.data.forEach(
+        ({ scheduleDate, startTime, endTime, title }) => {
+          const date = new Date(scheduleDate)
+          const dayIndex = date.getDay()
+          const startHour = startTime - 6
+          const endHour = endTime - 6
+          const midPoint = Math.floor((startHour + endHour) / 2)
+
+          for (let i = startHour; i < endHour; i++) {
+            if (i >= 0 && i < 19) {
+              newSchedule[i][dayIndex] = {
+                title: i === midPoint ? title : '',
+                highlight: true
+              }
+            }
+          }
+        }
+      )
+
+      setSchedule(newSchedule)
+    }
+  }, [scheduleList])
 
   return (
     <div className="px-5 h-full">
@@ -55,7 +82,10 @@ const ScheduleContainer = ({ weekData }) => {
               {days.map((_, colIndex) => (
                 <td
                   key={colIndex}
-                  className={`w-[120px] h-[80px] border border-black p-2 ${schedule[rowIndex]?.[colIndex] ? 'bg-yellow-200' : ''}`}></td>
+                  className={`w-[120px] h-[80px] border border-black p-2 ${schedule[rowIndex]?.[colIndex]?.highlight ? 'bg-yellow-200' : ''}`}
+                  style={{ textAlign: 'center', verticalAlign: 'middle' }}>
+                  {schedule[rowIndex]?.[colIndex]?.title || ''}
+                </td>
               ))}
             </tr>
           ))}
