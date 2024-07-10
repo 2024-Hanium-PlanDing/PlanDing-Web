@@ -20,16 +20,17 @@ export const postPersonalSchedule = (token, scheduleData) => async dispatch => {
 }
 
 export const getPersonalSchedule =
-  (token, weekOffset = 2) =>
-  async dispatch => {
+  (token, startDate, endDate) => async dispatch => {
     try {
-      const response = await basicApi.get('/api/v1/schedule', {
-        params: { weekOffset },
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json'
+      const response = await basicApi.get(
+        `/api/v1/schedule/week/${startDate}/${endDate}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
         }
-      })
+      )
       dispatch(setPersonalSchedule(response.data))
     } catch (error) {
       console.error('Error fetching schedule:', error)

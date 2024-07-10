@@ -1,7 +1,7 @@
 import MainTitle from '../ListPage/MainContent/atom/MainTitle'
 import ScheduleContainer from './Schedule/ScheduleContainer'
 
-const PersonalContainer = () => {
+const PersonalContainer = ({ weekData }) => {
   return (
     <div className="w-[1012px] h-[848px] rounded-lg shadow-md p-5 border border-black">
       <div className="border border-black w-full h-full flex flex-col">
@@ -9,7 +9,7 @@ const PersonalContainer = () => {
           <MainTitle />
         </div>
         <div className="flex-grow p-2 overflow-y-scroll">
-          <ScheduleContainer />
+          <ScheduleContainer weekData={weekData} />
         </div>
       </div>
     </div>

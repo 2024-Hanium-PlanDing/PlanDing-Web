@@ -12,6 +12,9 @@ const PersonalPage = () => {
   const token = useSelector(state => state.user.token)
   const dispatch = useDispatch()
   const scheduleList = useSelector(state => state.personal.persnoalSchedule)
+  const weekData = useSelector(state => state.date)
+  console.log(weekData)
+  console.log(scheduleList)
 
   const [scheduleData, setScheduleData] = useState({
     title: '',
@@ -31,8 +34,8 @@ const PersonalPage = () => {
   }
 
   useEffect(() => {
-    dispatch(getPersonalSchedule(token))
-  }, [token])
+    dispatch(getPersonalSchedule(token, weekData.startDate, weekData.endDate))
+  }, [token, weekData])
 
   const onChangeData = e => {
     const { name, value } = e.target
@@ -63,7 +66,7 @@ const PersonalPage = () => {
     <div className="flex items-center justify-center w-screen h-screen bg-[#F6F6F6]">
       <div className="flex gap-2.5">
         <FavoritesContainer />
-        <PersonalContainer />
+        <PersonalContainer weekData={weekData} />
         <InformationContainer
           scheduleData={scheduleData}
           onChangeData={onChangeData}
