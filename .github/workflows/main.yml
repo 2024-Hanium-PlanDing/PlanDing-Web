@@ -25,6 +25,7 @@ jobs:
       run: npm run build
       env:
         VITE_SERVER_URL: ${{ secrets.VITE_SERVER_URL }}
+        VITE_VIEW_WEBSOCKET_URL: ${{ secrets.VITE_VIEW_WEBSOCKET_URL }}
     - name: Deploy to S3
       run: |
           aws s3 sync ./dist s3://planding-front
