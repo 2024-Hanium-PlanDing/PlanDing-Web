@@ -1,5 +1,6 @@
 const SET_GROUP = 'SET_GROUP'
 const CREATE_GROUP = 'CREATE_GROUP'
+const GROUP_INFO = 'GROUP_INFO'
 
 export const setGroup = group => ({
   type: SET_GROUP,
@@ -11,8 +12,16 @@ export const createGroup = title => ({
   payload: title
 })
 
+export const groupInfo = groupId => ({
+  type: GROUP_INFO,
+  payload: groupId
+})
+
 const initialState = {
   groups: {
+    data: []
+  },
+  groupInfo: {
     data: []
   }
 }
@@ -30,6 +39,11 @@ const groupReducer = (state = initialState, action) => {
         groups: {
           data: [...state.groups.data, action.payload]
         }
+      }
+    case GROUP_INFO:
+      return {
+        ...state,
+        groupInfo: action.payload
       }
     default:
       return state

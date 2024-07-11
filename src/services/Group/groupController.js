@@ -1,5 +1,9 @@
 import basicApi from '..'
-import { createGroup, setGroup } from '../../redux/modules/groupReducer'
+import {
+  createGroup,
+  groupInfo,
+  setGroup
+} from '../../redux/modules/groupReducer'
 
 export const setGroupList = token => async dispatch => {
   try {
@@ -48,3 +52,17 @@ export const createGroupList =
       throw error
     }
   }
+
+export const getGroupInfo = (token, groupCode) => async dispatch => {
+  try {
+    const response = await basicApi.get(`/api/v1/group/${groupCode}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    dispatch(groupInfo(response.data))
+  } catch (error) {
+    console.error('Error:', error)
+    throw error
+  }
+}
