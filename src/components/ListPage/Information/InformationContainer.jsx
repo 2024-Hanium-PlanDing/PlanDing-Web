@@ -17,15 +17,16 @@ const InformationContainer = ({
       <UserInfoContainer />
       <CustomCalendar />
       {path === '/list' && <TodayListContainer />}
-      {path === '/personal' && (
-        <ScheduleCreateContainer
-          scheduleData={scheduleData}
-          onChangeData={onChangeData}
-          onChangeDate={onChangeDate}
-          resetData={resetData}
-          createSchedule={createSchedule}
-        />
-      )}
+      {path === '/personal' ||
+        (path.startsWith('/group/') && (
+          <ScheduleCreateContainer
+            scheduleData={scheduleData}
+            onChangeData={onChangeData}
+            onChangeDate={onChangeDate}
+            resetData={resetData}
+            createSchedule={createSchedule}
+          />
+        ))}
     </div>
   )
 }

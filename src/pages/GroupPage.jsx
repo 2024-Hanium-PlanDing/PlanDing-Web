@@ -38,14 +38,7 @@ const GroupPage = () => {
     }
 
     dispatch(getGroupInfo(userInfo.token, code))
-    dispatch(
-      getGroupSchedule(
-        userInfo.token,
-        code,
-        weekData.startDate,
-        weekData.endDate
-      )
-    )
+
     const stompClient = new Client({
       brokerURL: WEBSOCKET_URL,
       reconnectDelay: 5000,
@@ -55,7 +48,11 @@ const GroupPage = () => {
           `/sub/schedule/${code}`,
           message => {
             const messageBody = JSON.parse(message.body)
-            setScheduleData(prevMessages => [...prevMessages, messageBody])
+            setScheduleData(prevMessages =>
+              Array.isArray(prevMessages)
+                ? [...prevMessages, messageBody]
+                : [messageBody]
+            )
             console.log('Received message:', messageBody)
           },
           { Authorization: `Bearer ${userInfo?.token}` }
@@ -75,6 +72,16 @@ const GroupPage = () => {
     }
   }, [userInfo, code])
 
+  useEffect(() => {
+    dispatch(
+      getGroupSchedule(
+        userInfo.token,
+        code,
+        weekData.startDate,
+        weekData.endDate
+      )
+    )
+  }, [weekData.startDate, weekData.endDate])
   const sendMessage = () => {
     if (client && client.active) {
       const message = {
