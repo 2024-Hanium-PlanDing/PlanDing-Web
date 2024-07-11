@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { Client } from '@stomp/stompjs'
 import FavoritesContainer from '../components/ListPage/Favorites/FavoritesContainer'
-
 import InformationContainer from '../components/ListPage/Information/InformationContainer'
 import useSchedule from '../hooks/useSchedule'
-import { getGroupInfo } from '../services/Group/groupController'
+import {
+  getGroupInfo,
+  getGroupSchedule
+} from '../services/Group/groupController'
 import GroupContainer from '../components/GroupPage/GroupContainer'
 
 const WEBSOCKET_URL = import.meta.env.VITE_VIEW_WEBSOCKET_URL
@@ -17,9 +19,8 @@ const GroupPage = () => {
   const dispatch = useDispatch()
   const userInfo = useSelector(state => state.user)
   const weekData = useSelector(state => state.date)
-  const scheduleList = useSelector(state => state.personal.persnoalSchedule)
+  const scheduleList = useSelector(state => state.group.groupSchedule)
   const groupInfo = useSelector(state => state.group.groupInfo)
-
   const { code } = useParams()
 
   const {
@@ -37,7 +38,14 @@ const GroupPage = () => {
     }
 
     dispatch(getGroupInfo(userInfo.token, code))
-
+    dispatch(
+      getGroupSchedule(
+        userInfo.token,
+        code,
+        weekData.startDate,
+        weekData.endDate
+      )
+    )
     const stompClient = new Client({
       brokerURL: WEBSOCKET_URL,
       reconnectDelay: 5000,

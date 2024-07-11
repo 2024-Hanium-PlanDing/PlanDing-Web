@@ -1,6 +1,7 @@
 const SET_GROUP = 'SET_GROUP'
 const CREATE_GROUP = 'CREATE_GROUP'
 const GROUP_INFO = 'GROUP_INFO'
+const SET_PERSONAL_GROUP = 'SET_PERSONAL_GROUP'
 
 export const setGroup = group => ({
   type: SET_GROUP,
@@ -17,11 +18,19 @@ export const groupInfo = groupId => ({
   payload: groupId
 })
 
+export const setGroupSchedule = data => ({
+  type: SET_PERSONAL_GROUP,
+  payload: data
+})
+
 const initialState = {
   groups: {
     data: []
   },
   groupInfo: {
+    data: []
+  },
+  groupSchedule: {
     data: []
   }
 }
@@ -44,6 +53,11 @@ const groupReducer = (state = initialState, action) => {
       return {
         ...state,
         groupInfo: action.payload
+      }
+    case SET_PERSONAL_GROUP:
+      return {
+        ...state,
+        groupSchedule: action.payload
       }
     default:
       return state
