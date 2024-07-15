@@ -5,13 +5,15 @@ import modalReducer from '../modules/modalReducer'
 import groupReducer from '../modules/groupReducer'
 import personalReducer from '../modules/personalReducer'
 import calendarReducer from '../modules/calendarReducer'
+import favoriteReducer from '../modules/favoriteReducer'
 
 const rootReducer = combineReducers({
   user: userReducer,
   modal: modalReducer,
   group: groupReducer,
   personal: personalReducer,
-  date: calendarReducer
+  date: calendarReducer,
+  favorite: favoriteReducer
 })
 
 const store = createStore(

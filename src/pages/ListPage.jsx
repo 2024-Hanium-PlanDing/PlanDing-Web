@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { openModal } from '../redux/modules/modalReducer'
 import { useEffect } from 'react'
 import { setGroupList } from '../services/Group/groupController'
+import { getFavoriteList } from '../services/Favorite/favoriteController'
 
 const ListPage = () => {
   const userInfo = useSelector(state => state.user)
@@ -17,7 +18,9 @@ const ListPage = () => {
 
   useEffect(() => {
     dispatch(setGroupList(userInfo.token))
+    dispatch(getFavoriteList(userInfo.token))
   }, [dispatch, userInfo.token])
+
   return (
     <div className="flex items-center justify-center w-screen h-screen bg-[#F6F6F6]">
       <div className="flex gap-2.5">
