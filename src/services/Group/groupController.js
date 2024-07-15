@@ -24,7 +24,6 @@ export const createGroupList =
   (token, title, description, file) => async dispatch => {
     try {
       const formData = new FormData()
-
       let variables = {
         name: title,
         description: description

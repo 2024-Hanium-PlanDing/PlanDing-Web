@@ -6,6 +6,7 @@ const Item = ({ onClick, data }) => {
       <img
         src={data?.thumbnailPath}
         className="w-[199px] h-[120px] border border-black rounded-sm"></img>
+      <p>{data?.name}</p>
     </div>
   )
 }

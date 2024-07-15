@@ -11,7 +11,6 @@ const ListPage = () => {
   const userInfo = useSelector(state => state.user)
   const dispatch = useDispatch()
   const groupData = useSelector(state => state.group.groups)
-
   const openModalHandle = () => {
     dispatch(openModal())
   }

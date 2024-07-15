@@ -26,8 +26,7 @@ export const getPersonalSchedule =
         `/api/v1/schedule/week/${startDate}/${endDate}`,
         {
           headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json'
+            Authorization: `Bearer ${token}`
           }
         }
       )

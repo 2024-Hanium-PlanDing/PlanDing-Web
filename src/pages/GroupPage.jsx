@@ -126,7 +126,7 @@ const GroupPage = () => {
         <GroupContainer
           weekData={weekData}
           scheduleList={scheduleList.data}
-          groupInfo={groupInfo.data}
+          groupInfo={groupInfo?.data}
           addFavoriteEvent={addFavoriteEvent}
         />
         <InformationContainer
