@@ -35,3 +35,19 @@ export const postFavorite = (token, groupCode) => async dispatch => {
     throw error
   }
 }
+
+export const deleteFavorite = (token, groupCode) => async dispatch => {
+  try {
+    const response = await basicApi.delete(`/api/v1/favorite/${groupCode}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    })
+    dispatch(getFavoriteList(token))
+    return response.data
+  } catch (error) {
+    console.error('Error:', error)
+    throw error
+  }
+}

@@ -10,7 +10,10 @@ import {
   getGroupSchedule
 } from '../services/Group/groupController'
 import GroupContainer from '../components/GroupPage/GroupContainer'
-import { postFavorite } from '../services/Favorite/favoriteController'
+import {
+  deleteFavorite,
+  postFavorite
+} from '../services/Favorite/favoriteController'
 
 const WEBSOCKET_URL = import.meta.env.VITE_VIEW_WEBSOCKET_URL
 
@@ -118,6 +121,14 @@ const GroupPage = () => {
       console.error('즐겨찾기 추가 중 오류 발생:', error)
     }
   }
+  const deleteFavoriteEvent = async () => {
+    try {
+      await dispatch(deleteFavorite(userInfo.token, code))
+      alert('즐겨찾기 삭제')
+    } catch (error) {
+      console.error('즐겨찾기 추가 중 오류 발생:', error)
+    }
+  }
 
   return (
     <div className="flex items-center justify-center w-screen h-screen bg-[#F6F6F6]">
@@ -128,6 +139,7 @@ const GroupPage = () => {
           scheduleList={scheduleList.data}
           groupInfo={groupInfo?.data}
           addFavoriteEvent={addFavoriteEvent}
+          deleteFavoriteEvent={deleteFavoriteEvent}
         />
         <InformationContainer
           scheduleData={scheduleData}

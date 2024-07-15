@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 
 const FavoriteItem = ({ data }) => {
   const nav = useNavigate()
-  console.log(data)
+
   return (
     <div
       className="w-[40px] h-[40px] rounded-full border border-black"
