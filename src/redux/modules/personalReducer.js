@@ -12,9 +12,7 @@ export const createPersonalSchedule = data => ({
 })
 
 const initialState = {
-  persnoalSchedule: {
-    data: []
-  }
+  persnoalSchedule: []
 }
 
 const personalReducer = (state = initialState, action) => {
@@ -27,9 +25,7 @@ const personalReducer = (state = initialState, action) => {
     case CREATE_PERSONAL_SCHEDULE:
       return {
         ...state,
-        persnoalSchedule: {
-          data: [...state.groups.data, action.payload]
-        }
+        persnoalSchedule: [...state.groups.data, action.payload]
       }
     default:
       return state

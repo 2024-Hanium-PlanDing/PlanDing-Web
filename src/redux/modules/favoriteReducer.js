@@ -12,9 +12,7 @@ export const addFavorite = data => ({
 })
 
 const initialState = {
-  favorites: {
-    data: []
-  }
+  favorites: []
 }
 
 const favoriteReducer = (state = initialState, action) => {
@@ -22,18 +20,12 @@ const favoriteReducer = (state = initialState, action) => {
     case SET_FAVORITE:
       return {
         ...state,
-        favorites: {
-          ...state.favorites,
-          data: action.payload
-        }
+        favorites: action.payload
       }
     case ADD_FAVORITE:
       return {
         ...state,
-        favorites: {
-          ...state.favorites,
-          data: [...state.favorites.data, action.payload]
-        }
+        favorites: [...state.favorites.data, action.payload]
       }
     default:
       return state

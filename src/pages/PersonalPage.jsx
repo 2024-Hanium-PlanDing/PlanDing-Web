@@ -44,7 +44,7 @@ const PersonalPage = () => {
         <FavoritesContainer />
         <PersonalContainer
           weekData={weekData}
-          scheduleList={scheduleList}
+          scheduleList={scheduleList.data}
         />
         <InformationContainer
           scheduleData={scheduleData}

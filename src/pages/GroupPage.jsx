@@ -125,8 +125,8 @@ const GroupPage = () => {
         <FavoritesContainer />
         <GroupContainer
           weekData={weekData}
-          scheduleList={scheduleList}
-          groupInfo={groupInfo.data}
+          scheduleList={scheduleList.data}
+          groupInfo={groupInfo}
           addFavoriteEvent={addFavoriteEvent}
         />
         <InformationContainer

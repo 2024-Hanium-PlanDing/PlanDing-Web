@@ -24,15 +24,9 @@ export const setGroupSchedule = data => ({
 })
 
 const initialState = {
-  groups: {
-    data: []
-  },
-  groupInfo: {
-    data: []
-  },
-  groupSchedule: {
-    data: []
-  }
+  groups: [],
+  groupInfo: [],
+  groupSchedule: []
 }
 
 const groupReducer = (state = initialState, action) => {
@@ -45,9 +39,7 @@ const groupReducer = (state = initialState, action) => {
     case CREATE_GROUP:
       return {
         ...state,
-        groups: {
-          data: [...state.groups.data, action.payload]
-        }
+        groups: [...state.groups.data, action.payload]
       }
     case GROUP_INFO:
       return {

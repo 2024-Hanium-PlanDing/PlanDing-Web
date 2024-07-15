@@ -15,7 +15,6 @@ const ListPage = () => {
   const openModalHandle = () => {
     dispatch(openModal())
   }
-
   useEffect(() => {
     dispatch(setGroupList(userInfo.token))
     dispatch(getFavoriteList(userInfo.token))

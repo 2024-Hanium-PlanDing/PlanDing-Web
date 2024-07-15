@@ -28,29 +28,27 @@ const ScheduleContainer = ({ weekData, scheduleList }) => {
   }, [weekData])
 
   useEffect(() => {
-    if (scheduleList && Array.isArray(scheduleList.data)) {
+    if (scheduleList && Array.isArray(scheduleList)) {
       const newSchedule = Array(19)
         .fill(null)
         .map(() => Array(7).fill(null))
 
-      scheduleList.data.forEach(
-        ({ scheduleDate, startTime, endTime, title }) => {
-          const date = new Date(scheduleDate)
-          const dayIndex = date.getDay()
-          const startHour = startTime - 6
-          const endHour = endTime - 6
-          const midPoint = Math.floor((startHour + endHour) / 2)
+      scheduleList.forEach(({ scheduleDate, startTime, endTime, title }) => {
+        const date = new Date(scheduleDate)
+        const dayIndex = date.getDay()
+        const startHour = startTime - 6
+        const endHour = endTime - 6
+        const midPoint = Math.floor((startHour + endHour) / 2)
 
-          for (let i = startHour; i < endHour; i++) {
-            if (i >= 0 && i < 19) {
-              newSchedule[i][dayIndex] = {
-                title: i === midPoint ? title : '',
-                highlight: true
-              }
+        for (let i = startHour; i < endHour; i++) {
+          if (i >= 0 && i < 19) {
+            newSchedule[i][dayIndex] = {
+              title: i === midPoint ? title : '',
+              highlight: true
             }
           }
         }
-      )
+      })
 
       setSchedule(newSchedule)
     }
