@@ -10,6 +10,7 @@ import {
   getGroupSchedule
 } from '../services/Group/groupController'
 import GroupContainer from '../components/GroupPage/GroupContainer'
+import { postFavorite } from '../services/Favorite/favoriteController'
 
 const WEBSOCKET_URL = import.meta.env.VITE_VIEW_WEBSOCKET_URL
 
@@ -109,6 +110,15 @@ const GroupPage = () => {
     }
   }
 
+  const addFavoriteEvent = async () => {
+    try {
+      await dispatch(postFavorite(userInfo.token, code))
+      alert('즐겨찾기 추가')
+    } catch (error) {
+      console.error('즐겨찾기 추가 중 오류 발생:', error)
+    }
+  }
+
   return (
     <div className="flex items-center justify-center w-screen h-screen bg-[#F6F6F6]">
       <div className="flex gap-2.5">
@@ -117,6 +127,7 @@ const GroupPage = () => {
           weekData={weekData}
           scheduleList={scheduleList}
           groupInfo={groupInfo.data}
+          addFavoriteEvent={addFavoriteEvent}
         />
         <InformationContainer
           scheduleData={scheduleData}
