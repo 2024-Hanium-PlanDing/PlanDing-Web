@@ -1,7 +1,9 @@
 const SET_GROUP = 'SET_GROUP'
 const CREATE_GROUP = 'CREATE_GROUP'
 const GROUP_INFO = 'GROUP_INFO'
-const SET_PERSONAL_GROUP = 'SET_PERSONAL_GROUP'
+const ADD_GROUP_SCHEDULE = 'ADD_GROUP_SCHEDULE'
+const REMOVE_GROUP_SCHEDULE = 'REMOVE_GROUP_SCHEDULE'
+const SET_GROUP_SCHEDULE = 'SET_GROUP_SCHEDULE'
 
 export const setGroup = group => ({
   type: SET_GROUP,
@@ -19,10 +21,19 @@ export const groupInfo = groupId => ({
 })
 
 export const setGroupSchedule = data => ({
-  type: SET_PERSONAL_GROUP,
+  type: SET_GROUP_SCHEDULE,
   payload: data
 })
 
+export const addGroupSchedule = data => ({
+  type: ADD_GROUP_SCHEDULE,
+  payload: data
+})
+
+export const removeGroupSchedule = id => ({
+  type: REMOVE_GROUP_SCHEDULE,
+  payload: id
+})
 const initialState = {
   groups: [],
   groupInfo: [],
@@ -46,10 +57,22 @@ const groupReducer = (state = initialState, action) => {
         ...state,
         groupInfo: action.payload
       }
-    case SET_PERSONAL_GROUP:
+    case SET_GROUP_SCHEDULE:
       return {
         ...state,
         groupSchedule: action.payload
+      }
+    case ADD_GROUP_SCHEDULE:
+      return {
+        ...state,
+        groupSchedule: [...state.groupSchedule, action.payload]
+      }
+    case REMOVE_GROUP_SCHEDULE:
+      return {
+        ...state,
+        groupSchedule: state.groupSchedule.filter(
+          schedule => schedule.id !== action.payload
+        )
       }
     default:
       return state

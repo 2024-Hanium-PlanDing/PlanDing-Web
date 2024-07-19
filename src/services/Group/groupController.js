@@ -79,7 +79,7 @@ export const getGroupSchedule =
           }
         }
       )
-      dispatch(setGroupSchedule(response.data))
+      dispatch(setGroupSchedule(response.data.data))
     } catch (error) {
       console.error('Error fetching schedule:', error)
       throw error

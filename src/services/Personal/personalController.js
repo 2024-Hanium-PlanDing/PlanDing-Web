@@ -1,7 +1,7 @@
 import basicApi from '..'
 import {
   createPersonalSchedule,
-  deleteSchedule,
+  removePersonalSchedule,
   setPersonalSchedule
 } from '../../redux/modules/personalReducer'
 
@@ -46,7 +46,7 @@ export const deletePersonalSchedule = (token, id) => async dispatch => {
       }
     })
 
-    dispatch(deleteSchedule(id))
+    dispatch(removePersonalSchedule(id))
     return response
   } catch (error) {
     console.error('Error fetching schedule:', error)

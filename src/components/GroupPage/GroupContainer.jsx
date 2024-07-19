@@ -6,7 +6,8 @@ const GroupContainer = ({
   scheduleList,
   groupInfo,
   addFavoriteEvent,
-  deleteFavoriteEvent
+  deleteFavoriteEvent,
+  deleteSchedule
 }) => {
   return (
     <div className="w-[1012px] h-[848px] rounded-lg shadow-md p-5 border border-black">
@@ -28,6 +29,7 @@ const GroupContainer = ({
           <ScheduleContainer
             weekData={weekData}
             scheduleList={scheduleList}
+            deleteSchedule={deleteSchedule}
           />
         </div>
       </div>
