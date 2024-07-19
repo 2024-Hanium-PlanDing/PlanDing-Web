@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-const ScheduleContainer = ({ weekData, scheduleList }) => {
+const ScheduleContainer = ({ weekData, scheduleList, deleteSchedule }) => {
   const [schedule, setSchedule] = useState([])
   const [weekDates, setWeekDates] = useState([])
   const days = [
@@ -33,22 +33,30 @@ const ScheduleContainer = ({ weekData, scheduleList }) => {
         .fill(null)
         .map(() => Array(7).fill(null))
 
-      scheduleList.forEach(({ scheduleDate, startTime, endTime, title }) => {
-        const date = new Date(scheduleDate)
-        const dayIndex = date.getDay()
-        const startHour = startTime - 6
-        const endHour = endTime - 6
-        const midPoint = Math.floor((startHour + endHour) / 2)
+      scheduleList.forEach(
+        ({ scheduleDate, startTime, endTime, title, id }) => {
+          const date = new Date(scheduleDate)
+          const dayIndex = date.getDay()
+          const startHour = startTime - 6
+          const endHour = endTime - 6
+          const midPoint = Math.floor((startHour + endHour) / 2)
 
-        for (let i = startHour; i < endHour; i++) {
-          if (i >= 0 && i < 19) {
-            newSchedule[i][dayIndex] = {
-              title: i === midPoint ? title : '',
-              highlight: true
+          for (let i = startHour; i < endHour; i++) {
+            if (i >= 0 && i < 19) {
+              newSchedule[i][dayIndex] = {
+                first: i === startHour ? 'start' : '',
+                id: i === startHour ? id : '',
+                title: i === midPoint ? title : '',
+                highlight: true,
+                scheduleInfo:
+                  i === midPoint
+                    ? { scheduleDate, startTime, endTime, title, id }
+                    : null
+              }
             }
           }
         }
-      })
+      )
 
       setSchedule(newSchedule)
     }
@@ -83,6 +91,17 @@ const ScheduleContainer = ({ weekData, scheduleList }) => {
                   className={`w-[120px] h-[80px] border border-black p-2 ${schedule[rowIndex]?.[colIndex]?.highlight ? 'bg-yellow-200' : ''}`}
                   style={{ textAlign: 'center', verticalAlign: 'middle' }}>
                   {schedule[rowIndex]?.[colIndex]?.title || ''}
+                  {schedule[rowIndex]?.[colIndex]?.first ? (
+                    <button
+                      className="border border-black"
+                      onClick={() =>
+                        deleteSchedule(schedule[rowIndex]?.[colIndex]?.id)
+                      }>
+                      삭제
+                    </button>
+                  ) : (
+                    ''
+                  )}
                 </td>
               ))}
             </tr>

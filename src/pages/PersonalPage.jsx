@@ -4,7 +4,8 @@ import InformationContainer from '../components/ListPage/Information/Information
 import PersonalContainer from '../components/PersonalPage/PersonalContainer'
 import {
   postPersonalSchedule,
-  getPersonalSchedule
+  getPersonalSchedule,
+  deletePersonalSchedule
 } from '../services/Personal/personalController'
 import { useDispatch, useSelector } from 'react-redux'
 import useSchedule from '../hooks/useSchedule'
@@ -12,7 +13,7 @@ import useSchedule from '../hooks/useSchedule'
 const PersonalPage = () => {
   const token = useSelector(state => state.user.token)
   const dispatch = useDispatch()
-  const scheduleList = useSelector(state => state.personal.persnoalSchedule)
+  const scheduleList = useSelector(state => state.personal.personalSchedule)
   const weekData = useSelector(state => state.date)
 
   const {
@@ -37,6 +38,9 @@ const PersonalPage = () => {
       scheduleDate: null
     })
   }
+  const deleteSchedule = id => {
+    dispatch(deletePersonalSchedule(token, id))
+  }
 
   return (
     <div className="flex items-center justify-center w-screen h-screen bg-[#F6F6F6]">
@@ -44,7 +48,8 @@ const PersonalPage = () => {
         <FavoritesContainer />
         <PersonalContainer
           weekData={weekData}
-          scheduleList={scheduleList.data}
+          scheduleList={scheduleList}
+          deleteSchedule={deleteSchedule}
         />
         <InformationContainer
           scheduleData={scheduleData}

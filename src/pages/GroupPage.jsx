@@ -49,7 +49,6 @@ const GroupPage = () => {
       onConnect: () => {
         console.log('Connected!')
         stompClient.subscribe(
-          `/sub/schedule/${code}`,
           message => {
             const messageBody = JSON.parse(message.body)
             setScheduleData(prevMessages =>
@@ -91,16 +90,15 @@ const GroupPage = () => {
       const message = {
         userCode: userInfo.user.userInfo.userCode,
         groupCode: code,
-        title: 'title',
+        title: '12312321',
         content: 'content',
-        scheduleDate: '2024-07-16',
-        startTime: 7,
-        endTime: 8,
-        action: 'CREATE'
+        scheduleDate: '2024-07-25',
+        startTime: 16,
+        endTime: 22
       }
 
       client.publish({
-        destination: `/pub/schedule/${code}`,
+        destination: `/pub/schedule/create/${code}`,
         headers: {
           Authorization: `Bearer ${userInfo?.token}`,
           groupCode: code

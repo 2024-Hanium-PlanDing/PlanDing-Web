@@ -1,6 +1,7 @@
 import basicApi from '..'
 import {
   createPersonalSchedule,
+  deleteSchedule,
   setPersonalSchedule
 } from '../../redux/modules/personalReducer'
 
@@ -12,7 +13,7 @@ export const postPersonalSchedule = (token, scheduleData) => async dispatch => {
         'Content-Type': 'application/json'
       }
     })
-    dispatch(createPersonalSchedule(response))
+    dispatch(createPersonalSchedule(response.data.data))
   } catch (error) {
     console.error('Error fetching posts:', error)
     throw error
@@ -30,9 +31,25 @@ export const getPersonalSchedule =
           }
         }
       )
-      dispatch(setPersonalSchedule(response.data))
+      dispatch(setPersonalSchedule(response.data.data))
     } catch (error) {
       console.error('Error fetching schedule:', error)
       throw error
     }
   }
+
+export const deletePersonalSchedule = (token, id) => async dispatch => {
+  try {
+    const response = await basicApi.delete(`/api/v1/schedule/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+
+    dispatch(deleteSchedule(id))
+    return response
+  } catch (error) {
+    console.error('Error fetching schedule:', error)
+    throw error
+  }
+}
