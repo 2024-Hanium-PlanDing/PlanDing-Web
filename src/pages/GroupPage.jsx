@@ -29,6 +29,9 @@ const GroupPage = () => {
   const weekData = useSelector(state => state.date)
   const scheduleList = useSelector(state => state.group.groupSchedule)
   const groupInfo = useSelector(state => state.group.groupInfo)
+
+  const [chatState, setChatState] = useState(false)
+
   const { code } = useParams()
   const {
     scheduleData,
@@ -169,6 +172,10 @@ const GroupPage = () => {
     }
   }
 
+  const toggleChatState = () => {
+    setChatState(pre => !pre)
+  }
+
   return (
     <div className="flex items-center justify-center w-screen h-screen bg-[#F6F6F6]">
       <div className="flex gap-2.5">
@@ -188,6 +195,12 @@ const GroupPage = () => {
           resetData={resetData}
           createSchedule={sendMessage}
         />
+        <button
+          type="button"
+          onClick={toggleChatState}
+          className="w-[72px] h-[72px] bg-primary-100 rounded-full shadow-xl absolute right-20 bottom-20">
+          {chatState ? '채팅' : '닫기'}
+        </button>
       </div>
     </div>
   )
