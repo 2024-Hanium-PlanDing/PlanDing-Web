@@ -25,10 +25,12 @@ const CustomCalendar = () => {
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DateCalendar
-        value={selectedDate}
-        onChange={newValue => setSelectedDate(newValue)}
-      />
+      <div className="w-full">
+        <DateCalendar
+          value={selectedDate}
+          onChange={newValue => setSelectedDate(newValue)}
+        />
+      </div>
     </LocalizationProvider>
   )
 }

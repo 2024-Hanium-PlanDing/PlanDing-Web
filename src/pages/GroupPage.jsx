@@ -18,6 +18,7 @@ import {
   addGroupSchedule,
   removeGroupSchedule
 } from '../redux/modules/groupReducer'
+import ChatContainer from '../components/GroupPage/Chat/ChatContainer'
 
 const WEBSOCKET_URL = import.meta.env.VITE_VIEW_WEBSOCKET_URL
 
@@ -195,12 +196,15 @@ const GroupPage = () => {
           resetData={resetData}
           createSchedule={sendMessage}
         />
-        <button
-          type="button"
-          onClick={toggleChatState}
-          className="w-[72px] h-[72px] bg-primary-100 rounded-full shadow-xl absolute right-20 bottom-20">
-          {chatState ? '채팅' : '닫기'}
-        </button>
+        <div className="absolute right-20 bottom-20 flex flex-col items-end gap-2">
+          <ChatContainer visible={chatState} />
+          <button
+            type="button"
+            onClick={toggleChatState}
+            className="w-[72px] h-[72px] bg-primary-100 rounded-full shadow-xl">
+            {chatState ? '닫기' : '열기'}
+          </button>
+        </div>
       </div>
     </div>
   )
