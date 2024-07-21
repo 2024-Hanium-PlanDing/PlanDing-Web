@@ -201,7 +201,7 @@ const GroupPage = () => {
           <button
             type="button"
             onClick={toggleChatState}
-            className="w-[72px] h-[72px] bg-primary-100 rounded-full shadow-xl">
+            className="w-[56px] h-[56px] bg-primary-100 rounded-full shadow-xl">
             {chatState ? '닫기' : '열기'}
           </button>
         </div>
