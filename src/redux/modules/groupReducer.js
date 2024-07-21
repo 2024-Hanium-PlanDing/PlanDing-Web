@@ -4,6 +4,7 @@ const GROUP_INFO = 'GROUP_INFO'
 const ADD_GROUP_SCHEDULE = 'ADD_GROUP_SCHEDULE'
 const REMOVE_GROUP_SCHEDULE = 'REMOVE_GROUP_SCHEDULE'
 const SET_GROUP_SCHEDULE = 'SET_GROUP_SCHEDULE'
+const ADD_GROUP_CAHT = 'ADD_GROUP_CAHT'
 
 export const setGroup = group => ({
   type: SET_GROUP,
@@ -34,10 +35,17 @@ export const removeGroupSchedule = id => ({
   type: REMOVE_GROUP_SCHEDULE,
   payload: id
 })
+
+export const addGroupChat = data => ({
+  type: ADD_GROUP_CAHT,
+  payload: data
+})
+
 const initialState = {
   groups: [],
   groupInfo: [],
-  groupSchedule: []
+  groupSchedule: [],
+  groupChat: []
 }
 
 const groupReducer = (state = initialState, action) => {
@@ -73,6 +81,11 @@ const groupReducer = (state = initialState, action) => {
         groupSchedule: state.groupSchedule.filter(
           schedule => schedule.id !== action.payload
         )
+      }
+    case ADD_GROUP_CAHT:
+      return {
+        ...state,
+        groupChat: [...state.groupChat, action.payload]
       }
     default:
       return state

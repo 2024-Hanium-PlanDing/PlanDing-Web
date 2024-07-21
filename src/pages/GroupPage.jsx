@@ -15,6 +15,7 @@ import {
   postFavorite
 } from '../services/Favorite/favoriteController'
 import {
+  addGroupChat,
   addGroupSchedule,
   removeGroupSchedule
 } from '../redux/modules/groupReducer'
@@ -30,9 +31,10 @@ const GroupPage = () => {
   const weekData = useSelector(state => state.date)
   const scheduleList = useSelector(state => state.group.groupSchedule)
   const groupInfo = useSelector(state => state.group.groupInfo)
+  const groupChatData = useSelector(state => state.group.groupChat)
 
   const [chatState, setChatState] = useState(false)
-
+  const [chatData, setChatData] = useState('')
   const { code } = useParams()
   const {
     scheduleData,
@@ -75,6 +77,14 @@ const GroupPage = () => {
               default:
                 console.warn('Unknown action:', messageBody.data.action)
             }
+          },
+          { Authorization: `Bearer ${userInfo?.token}` }
+        )
+        stompClient.subscribe(
+          `/sub/chat/room/${code}`,
+          message => {
+            const messageBody = JSON.parse(message.body)
+            dispatch(addGroupChat(messageBody))
           },
           { Authorization: `Bearer ${userInfo?.token}` }
         )
@@ -176,6 +186,28 @@ const GroupPage = () => {
   const toggleChatState = () => {
     setChatState(pre => !pre)
   }
+  const sendChat = () => {
+    if (client && client.active && chatData) {
+      const chat = {
+        groupCode: code,
+        content: chatData,
+        sender: userInfo.user.userInfo.userCode,
+        type: 'CHAT'
+      }
+      client.publish({
+        destination: `/pub/chat/${code}`,
+        headers: {
+          Authorization: `Bearer ${userInfo?.token}`,
+          groupCode: code
+        },
+        body: JSON.stringify(chat)
+      })
+
+      setChatData('')
+    } else {
+      console.error('Client is not connected.')
+    }
+  }
 
   return (
     <div className="flex items-center justify-center w-screen h-screen bg-[#F6F6F6]">
@@ -197,7 +229,14 @@ const GroupPage = () => {
           createSchedule={sendMessage}
         />
         <div className="absolute right-20 bottom-20 flex flex-col items-end gap-2">
-          <ChatContainer visible={chatState} />
+          <ChatContainer
+            visible={chatState}
+            groupChatData={groupChatData}
+            chatData={chatData}
+            setChatData={setChatData}
+            sendChat={sendChat}
+            userCode={userInfo.user.userInfo.userCode}
+          />
           <button
             type="button"
             onClick={toggleChatState}
