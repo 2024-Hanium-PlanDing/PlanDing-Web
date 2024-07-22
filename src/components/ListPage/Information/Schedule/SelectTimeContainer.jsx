@@ -35,7 +35,7 @@ export default function SelectTimeContainer({ scheduleData, onChangeData }) {
           name="startTime"
           onChange={onChangeData}
           label="startTime">
-          {createTimeOptions(6, 23, scheduleData?.endTime)}
+          {createTimeOptions(6, 23)}
         </Select>
       </FormControl>
       <FormControl
@@ -51,7 +51,7 @@ export default function SelectTimeContainer({ scheduleData, onChangeData }) {
           onChange={onChangeData}
           name="endTime"
           label="endTime">
-          {createTimeOptions(6, 23, scheduleData?.startTime)}
+          {createTimeOptions(6, 24)}
         </Select>
       </FormControl>
     </div>
