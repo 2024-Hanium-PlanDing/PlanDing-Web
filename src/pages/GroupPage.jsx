@@ -81,7 +81,7 @@ const GroupPage = () => {
           { Authorization: `Bearer ${userInfo?.token}` }
         )
         stompClient.subscribe(
-          `/sub/chat/room/${code}`,
+          `/sub/chat/${code}`,
           message => {
             const messageBody = JSON.parse(message.body)
             dispatch(addGroupChat(messageBody))
