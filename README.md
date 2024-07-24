@@ -37,7 +37,6 @@
 
 - Front : React, TailwindCSS, Redux
 - Back-end : 제공된 API 활용
-- 버전 및 이슈관리 : Github, Github Issues, Github Project
 - 협업 툴 : Jira, Confluence, Notion
 
 <br>
