@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { Client } from '@stomp/stompjs'
@@ -20,12 +20,14 @@ import {
   removeGroupSchedule
 } from '../redux/modules/groupReducer'
 import ChatContainer from '../components/GroupPage/Chat/ChatContainer'
+import { postInvitation } from '../services/Group/inviteController'
 
 const WEBSOCKET_URL = import.meta.env.VITE_VIEW_WEBSOCKET_URL
 
 const GroupPage = () => {
   const [client, setClient] = useState(null)
 
+  const inputRef = useRef()
   const dispatch = useDispatch()
   const userInfo = useSelector(state => state.user)
   const weekData = useSelector(state => state.date)
@@ -209,8 +211,31 @@ const GroupPage = () => {
     }
   }
 
+  const inviteHandle = async () => {
+    const userCode = inputRef.current.value
+    try {
+      await postInvitation(userInfo?.token, groupInfo.data.id, userCode)
+      alert('초대 했습니다.')
+    } catch (error) {
+      error.log(error)
+    }
+  }
+
   return (
     <div className="flex items-center justify-center w-screen h-screen bg-[#F6F6F6]">
+      <div>
+        <input
+          ref={inputRef}
+          className="border border-black"
+          type="text"
+        />
+        <button
+          type="button"
+          onClick={inviteHandle}>
+          초대하기
+        </button>
+      </div>
+
       <div className="flex gap-2.5">
         <FavoritesContainer />
         <GroupContainer
