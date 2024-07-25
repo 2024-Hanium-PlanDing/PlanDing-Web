@@ -62,6 +62,10 @@ const GroupPage = () => {
 
     const stompClient = new Client({
       brokerURL: WEBSOCKET_URL,
+      connectHeaders: {
+        Authorization: `Bearer ${userInfo.token}`,
+        groupCode: code
+      },
       reconnectDelay: 5000,
       onConnect: () => {
         console.log('Connected!')
@@ -120,7 +124,6 @@ const GroupPage = () => {
     if (client && client.active) {
       const groupData = {
         userCode: userInfo.user.userInfo.userCode,
-        groupCode: code,
         ...scheduleData
       }
       client.publish({
@@ -146,7 +149,6 @@ const GroupPage = () => {
     if (client && client.active) {
       const groupData = {
         userCode: userInfo.user.userInfo.userCode,
-        groupCode: code,
         scheduleId: id
       }
       client.publish({
@@ -188,13 +190,11 @@ const GroupPage = () => {
   const toggleChatState = () => {
     setChatState(pre => !pre)
   }
+
   const sendChat = () => {
     if (client && client.active && chatData) {
       const chat = {
-        groupCode: code,
-        content: chatData,
-        sender: userInfo.user.userInfo.userCode,
-        type: 'CHAT'
+        content: chatData
       }
       client.publish({
         destination: `/pub/chat/${code}`,
@@ -202,9 +202,9 @@ const GroupPage = () => {
           Authorization: `Bearer ${userInfo?.token}`,
           groupCode: code
         },
+
         body: JSON.stringify(chat)
       })
-
       setChatData('')
     } else {
       console.error('Client is not connected.')
