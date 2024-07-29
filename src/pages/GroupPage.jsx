@@ -21,6 +21,7 @@ import {
 } from '../redux/modules/groupReducer'
 import ChatContainer from '../components/GroupPage/Chat/ChatContainer'
 import { postInvitation } from '../services/Group/inviteController'
+import { postChat } from '../services/Chat/chatController'
 
 const WEBSOCKET_URL = import.meta.env.VITE_VIEW_WEBSOCKET_URL
 
@@ -45,7 +46,6 @@ const GroupPage = () => {
     onChangeDate,
     onChangeData
   } = useSchedule()
-
   useEffect(() => {
     if (!userInfo?.token) {
       console.error('User is not authenticated')
@@ -191,23 +191,10 @@ const GroupPage = () => {
     setChatState(pre => !pre)
   }
 
-  const sendChat = () => {
-    if (client && client.active && chatData) {
-      const chat = {
-        content: chatData
-      }
-      client.publish({
-        destination: `/pub/chat/${code}`,
-        headers: {
-          Authorization: `Bearer ${userInfo?.token}`,
-          groupCode: code
-        },
-
-        body: JSON.stringify(chat)
-      })
+  const sendChat = async () => {
+    if (chatData) {
+      await postChat(userInfo.token, chatData, code)
       setChatData('')
-    } else {
-      console.error('Client is not connected.')
     }
   }
 

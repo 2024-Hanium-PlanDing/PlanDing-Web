@@ -13,8 +13,8 @@ const ChatContainer = ({
         {groupChatData?.map(message => (
           <div
             key={message.id}
-            className={`max-w-[286px] min-h-[40px] px-3 py-2.5 border flex-shrink-0 border-black rounded-lg break-words ${message.data.userCode === userCode ? 'self-end bg-primary-200 text-neutral-50' : 'self-start bg-gray-100'}`}>
-            {message.data.message}
+            className={`max-w-[286px] min-h-[40px] px-3 py-2.5 border flex-shrink-0 border-black rounded-lg break-words ${message.userCode === userCode ? 'self-end bg-primary-200 text-neutral-50' : 'self-start bg-gray-100'}`}>
+            {message.message}
           </div>
         ))}
       </div>
