@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { Client } from '@stomp/stompjs'
+
 import FavoritesContainer from '../components/ListPage/Favorites/FavoritesContainer'
 import InformationContainer from '../components/ListPage/Information/InformationContainer'
 import useSchedule from '../hooks/useSchedule'
@@ -14,20 +14,15 @@ import {
   deleteFavorite,
   postFavorite
 } from '../services/Favorite/favoriteController'
-import {
-  addGroupChat,
-  addGroupSchedule,
-  removeGroupSchedule
-} from '../redux/modules/groupReducer'
+
 import ChatContainer from '../components/GroupPage/Chat/ChatContainer'
 import { postInvitation } from '../services/Group/inviteController'
 import { postChat } from '../services/Chat/chatController'
+import useWebSocket from '../hooks/WebSocket/useWebSocket'
 
 const WEBSOCKET_URL = import.meta.env.VITE_VIEW_WEBSOCKET_URL
 
 const GroupPage = () => {
-  const [client, setClient] = useState(null)
-
   const inputRef = useRef()
   const dispatch = useDispatch()
   const userInfo = useSelector(state => state.user)
@@ -54,60 +49,7 @@ const GroupPage = () => {
     dispatch(getGroupInfo(userInfo.token, code))
   }, [userInfo.token, code, dispatch])
 
-  useEffect(() => {
-    if (!userInfo?.token) {
-      console.error('User is not authenticated')
-      return
-    }
-
-    const stompClient = new Client({
-      brokerURL: WEBSOCKET_URL,
-      connectHeaders: {
-        Authorization: `Bearer ${userInfo.token}`,
-        groupCode: code
-      },
-      reconnectDelay: 5000,
-      onConnect: () => {
-        console.log('Connected!')
-        stompClient.subscribe(
-          `/sub/schedule/${code}`,
-          message => {
-            const messageBody = JSON.parse(message.body)
-            switch (messageBody.data.action) {
-              case 'CREATE':
-                dispatch(addGroupSchedule(messageBody.data))
-                break
-              case 'DELETE':
-                dispatch(removeGroupSchedule(messageBody.data.id))
-                break
-              default:
-                console.warn('Unknown action:', messageBody.data.action)
-            }
-          },
-          { Authorization: `Bearer ${userInfo?.token}` }
-        )
-        stompClient.subscribe(
-          `/sub/chat/${code}`,
-          message => {
-            const messageBody = JSON.parse(message.body)
-            dispatch(addGroupChat(messageBody))
-          },
-          { Authorization: `Bearer ${userInfo?.token}` }
-        )
-      },
-      onStompError: frame => {
-        console.error('Broker reported error: ' + frame.headers['message'])
-        console.error('Additional details: ' + frame.body)
-      }
-    })
-
-    stompClient.activate()
-    setClient(stompClient)
-
-    return () => {
-      stompClient.deactivate()
-    }
-  }, [userInfo.token, code, dispatch])
+  const client = useWebSocket(userInfo.token, code, WEBSOCKET_URL)
 
   useEffect(() => {
     dispatch(
