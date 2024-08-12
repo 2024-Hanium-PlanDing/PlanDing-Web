@@ -43,12 +43,12 @@ const CreateGroupModal = () => {
       <div className="w-[472px] h-[649px] bg-neutrals-0 rounded-lg p-10">
         <div>
           <p className="text-primary-500 text-subtitle-2">그룹 만들기</p>
-          <p className="text-neutral-400 text-caption">
+          <p className="text-neutrals-400 text-caption">
             생성할 그룹의 정보를 입력해 주세요
           </p>
         </div>
         <div>
-          <p className="text-neutral-700 text-subtitle-2 mb-2 ">썸네일 선택</p>
+          <p className="text-neutrals-700 text-subtitle-2 mb-2 ">썸네일 선택</p>
           <label
             htmlFor="thumbnail"
             className="flex">

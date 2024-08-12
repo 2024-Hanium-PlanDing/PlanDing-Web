@@ -25,10 +25,25 @@ const CustomCalendar = () => {
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <div className="w-full">
+      <div className="w-[280px] h-[280px]">
         <DateCalendar
           value={selectedDate}
           onChange={newValue => setSelectedDate(newValue)}
+          sx={{
+            width: '280px',
+            height: '280px',
+            '.MuiDayCalendar-root': {
+              fontSize: '0.75rem', // 폰트 크기 줄이기
+              backgroundColor: '#f6f6f8'
+            },
+            '.MuiPickersDay-root': {
+              width: '32px', // 날짜 셀의 너비
+              height: '32px' // 날짜 셀의 높이
+            },
+            '.MuiPickersCalendarHeader-root': {
+              backgroundColor: '#f6f6f8'
+            }
+          }}
         />
       </div>
     </LocalizationProvider>

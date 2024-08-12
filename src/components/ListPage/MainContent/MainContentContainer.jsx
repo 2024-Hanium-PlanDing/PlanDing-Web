@@ -6,12 +6,12 @@ import SubTitle from './atom/SubTitle'
 const MainContentContainer = ({ openModal, groupData }) => {
   const nav = useNavigate(0)
   return (
-    <div className="w-[1012px] h-[848px] rounded-lg shadow-md p-5 border border-black">
-      <div className="border border-black w-full h-full flex flex-col">
+    <div className="w-[1012px] h-[848px] rounded-lg shadow-md p-5 bg-white">
+      <div className="border border-primary-300 rounded-md w-full h-full flex flex-col">
         <MainTitle />
-        <SubTitle text="My Plan" />
+        <SubTitle text="나의 일정" />
         <ItemContainer onClick={() => nav(`/personal`)} />
-        <SubTitle text="Team Plan" />
+        <SubTitle text="팀 일정" />
         <ItemContainer
           onClick={openModal}
           groupData={groupData}

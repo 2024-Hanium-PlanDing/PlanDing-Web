@@ -5,7 +5,7 @@ const FavoritesContainer = () => {
   const favoritesList = useSelector(state => state.favorite.favorites)
 
   return (
-    <div className="w-[88px] h-[781px] py-10 px-6 gap-10 shadow-md rounded-lg bg-[#FBFBFB] border border-black flex items-center flex-col">
+    <div className="w-[88px] h-[781px] py-10 px-6 mt-10 gap-10 shadow-md rounded-lg bg-white flex items-center flex-col">
       {favoritesList?.data?.map((data, index) => (
         <FavoriteItem
           data={data}

@@ -13,7 +13,7 @@ const InformationContainer = ({
   const path = window.location.pathname
 
   return (
-    <div className="w-[320px] h-[848px]  rounded-lg shadow-md bg-[#FBFBFB] py-5 flex-col gap-4 border border-black flex items-center ">
+    <div className="w-[320px] h-[848px]  rounded-lg shadow-md bg-white py-5 flex-col gap-4 flex items-center ">
       <UserInfoContainer />
       <CustomCalendar />
       {path === '/list' && <TodayListContainer />}
