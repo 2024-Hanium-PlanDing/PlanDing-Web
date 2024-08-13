@@ -3,11 +3,12 @@ import InformationContainer from '../components/ListPage/Information/Information
 import MainContentContainer from '../components/ListPage/MainContent/MainContentContainer'
 import { useDispatch, useSelector } from 'react-redux'
 import { openModal } from '../redux/modules/modalReducer'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { setGroupList } from '../services/Group/groupController'
 import { getFavoriteList } from '../services/Favorite/favoriteController'
 
 import { EventSourcePolyfill } from 'event-source-polyfill'
+import { getTodaySchedule } from '../services/todayController'
 
 export const VITE_SERVER_URL = import.meta.env.VITE_SERVER_URL
 
@@ -15,12 +16,23 @@ const ListPage = () => {
   const userInfo = useSelector(state => state.user)
   const dispatch = useDispatch()
   const groupData = useSelector(state => state.group.groups)
+  const [todaySchedule, setTodaySchedule] = useState()
   const openModalHandle = () => {
     dispatch(openModal())
   }
   useEffect(() => {
-    dispatch(setGroupList(userInfo.token))
-    dispatch(getFavoriteList(userInfo.token))
+    const fetchData = async () => {
+      try {
+        dispatch(setGroupList(userInfo.token))
+        dispatch(getFavoriteList(userInfo.token))
+        const data = await getTodaySchedule(userInfo.token)
+        setTodaySchedule(data)
+      } catch (error) {
+        console.error('Error fetching data:', error)
+      }
+    }
+
+    fetchData()
   }, [dispatch, userInfo.token])
 
   useEffect(() => {
@@ -36,7 +48,8 @@ const ListPage = () => {
         Authorization: `Bearer ${userInfo.token}`,
         Accept: 'text/event-stream'
       },
-      withCredentials: true
+      withCredentials: true,
+      heartbeatTimeout: 100000
     })
 
     // 연결 열림 이벤트
@@ -46,7 +59,12 @@ const ListPage = () => {
 
     // 메시지 수신 이벤트
     sse.onmessage = e => {
-      console.log(JSON.parse(e.data))
+      try {
+        const data = JSON.parse(e.data)
+        console.log(data)
+      } catch (error) {
+        console.warn('Received non-JSON message:', e.data)
+      }
     }
 
     // 오류 발생 이벤트
@@ -70,7 +88,7 @@ const ListPage = () => {
           openModal={openModalHandle}
           groupData={groupData?.data}
         />
-        <InformationContainer />
+        <InformationContainer todaySchedule={todaySchedule} />
       </div>
     </div>
   )

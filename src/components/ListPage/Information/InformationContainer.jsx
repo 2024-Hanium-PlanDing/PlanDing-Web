@@ -8,7 +8,8 @@ const InformationContainer = ({
   onChangeData,
   resetData,
   onChangeDate,
-  createSchedule
+  createSchedule,
+  todaySchedule
 }) => {
   const path = window.location.pathname
 
@@ -16,7 +17,7 @@ const InformationContainer = ({
     <div className="w-[320px] h-[848px]  rounded-lg shadow-md bg-white py-5 flex-col gap-4 flex items-center ">
       <UserInfoContainer />
       <CustomCalendar />
-      {path === '/list' && <TodayListContainer />}
+      {path === '/list' && <TodayListContainer todaySchedule={todaySchedule} />}
       {path === '/personal' || path.startsWith('/group/') ? (
         <ScheduleCreateContainer
           scheduleData={scheduleData}
