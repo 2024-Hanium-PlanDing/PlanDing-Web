@@ -9,11 +9,18 @@ const GroupContainer = ({
   deleteFavoriteEvent,
   deleteSchedule
 }) => {
+  const [year, month] = weekData.startDate.split('-')
+  const formattedDate = `${year}년 ${parseInt(month)}월`
   return (
-    <div className="w-[1012px] h-[848px] rounded-lg shadow-md p-5 border border-black">
-      <div className="border border-black w-full h-full flex flex-col">
+    <div className="w-[1012px] h-[848px] rounded-lg shadow-md p-5 bg-white">
+      <div className="w-full h-full flex flex-col gap-10 border-2 rounded-t-md border-neutrals-40">
         <div className="flex-none p-2">
-          <MainTitle text={groupInfo?.name} />
+          <div>
+            <MainTitle text={groupInfo?.name} />
+          </div>
+          <div className="flex justify-center items-center">
+            <p className="text-subtitle-1 text-primary-500">{formattedDate}</p>
+          </div>
           <button
             className="border border-black mr-4"
             onClick={addFavoriteEvent}>
