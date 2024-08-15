@@ -4,7 +4,7 @@ const LoginFormContainer = () => {
   return (
     <div className="w-[360px] h-[229px] flex flex-col gap-5">
       <LoginInput
-        text="User Name"
+        text="Email"
         textSize="text-body"
         textColor="text-neutrals-800"
       />
