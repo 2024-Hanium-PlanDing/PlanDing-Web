@@ -1,7 +1,8 @@
 # 📖 손쉬운 일정 관리와 플래너 공유 플랫폼 PlanDing
 <div align="center">
 
-![PlanDing1](https://github.com/user-attachments/assets/b6afafac-bed6-4c35-acb0-7e588fa9d0cb)
+![PlanDing](https://github.com/user-attachments/assets/bdc3270f-2876-4315-a1ad-2748dc2da830)
+
 
 </div>
 
