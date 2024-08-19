@@ -10,11 +10,15 @@ const MainContentContainer = ({ openModal, groupData }) => {
       <div className="border border-primary-300 rounded-md w-full h-full flex flex-col">
         <MainTitle />
         <SubTitle text="나의 일정" />
-        <ItemContainer onClick={() => nav(`/personal`)} />
+        <ItemContainer
+          onClick={() => nav(`/personal`)}
+          first="개인 일정"
+        />
         <SubTitle text="팀 일정" />
         <ItemContainer
           onClick={openModal}
           groupData={groupData}
+          first="그룹 생성"
         />
       </div>
     </div>
