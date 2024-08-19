@@ -96,6 +96,7 @@ const ListPage = () => {
         <MainContentContainer
           openModal={openModalHandle}
           groupData={groupData?.data}
+          userInfo={userInfo}
         />
         <FavoritesContainer />
       </div>

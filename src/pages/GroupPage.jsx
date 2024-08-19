@@ -166,7 +166,7 @@ const GroupPage = () => {
 
   return (
     <div className="flex items-center justify-center w-screen h-screen bg-[#F6F6F6]">
-      <div>
+      {/* <div>
         <input
           ref={inputRef}
           className="border border-black"
@@ -177,7 +177,7 @@ const GroupPage = () => {
           onClick={inviteHandle}>
           초대하기
         </button>
-      </div>
+      </div> */}
 
       <div className="flex gap-2.5">
         <InformationContainer
@@ -193,6 +193,7 @@ const GroupPage = () => {
           groupInfo={groupInfo?.data}
           favoriteToggle={favoriteToggle}
           deleteSchedule={deleteSchedule}
+          inviteHandle={inviteHandle}
         />
         <FavoritesContainer />
 
