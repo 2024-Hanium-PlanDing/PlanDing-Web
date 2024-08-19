@@ -83,12 +83,13 @@ const ListPage = () => {
   return (
     <div className="flex items-center justify-center w-screen h-screen bg-[#F6F6F6]">
       <div className="flex gap-2.5">
-        <FavoritesContainer />
+        <InformationContainer todaySchedule={todaySchedule} />
+
         <MainContentContainer
           openModal={openModalHandle}
           groupData={groupData?.data}
         />
-        <InformationContainer todaySchedule={todaySchedule} />
+        <FavoritesContainer />
       </div>
     </div>
   )

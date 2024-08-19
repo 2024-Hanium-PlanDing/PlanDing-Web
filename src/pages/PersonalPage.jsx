@@ -46,12 +46,6 @@ const PersonalPage = () => {
   return (
     <div className="flex items-center justify-center w-screen h-screen bg-[#F6F6F6]">
       <div className="flex gap-2.5">
-        <FavoritesContainer />
-        <PersonalContainer
-          weekData={weekData}
-          scheduleList={scheduleList}
-          deleteSchedule={deleteSchedule}
-        />
         <InformationContainer
           scheduleData={scheduleData}
           onChangeData={onChangeData}
@@ -59,6 +53,12 @@ const PersonalPage = () => {
           resetData={resetData}
           createSchedule={createSchedule}
         />
+        <PersonalContainer
+          weekData={weekData}
+          scheduleList={scheduleList}
+          deleteSchedule={deleteSchedule}
+        />
+        <FavoritesContainer />
       </div>
     </div>
   )

@@ -166,7 +166,13 @@ const GroupPage = () => {
       </div>
 
       <div className="flex gap-2.5">
-        <FavoritesContainer />
+        <InformationContainer
+          scheduleData={scheduleData}
+          onChangeData={onChangeData}
+          onChangeDate={onChangeDate}
+          resetData={resetData}
+          createSchedule={sendMessage}
+        />
         <GroupContainer
           weekData={weekData}
           scheduleList={scheduleList}
@@ -175,13 +181,8 @@ const GroupPage = () => {
           deleteFavoriteEvent={deleteFavoriteEvent}
           deleteSchedule={deleteSchedule}
         />
-        <InformationContainer
-          scheduleData={scheduleData}
-          onChangeData={onChangeData}
-          onChangeDate={onChangeDate}
-          resetData={resetData}
-          createSchedule={sendMessage}
-        />
+        <FavoritesContainer />
+
         <div className="absolute right-20 bottom-20 flex flex-col items-end gap-2">
           <ChatContainer
             visible={chatState}
