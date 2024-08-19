@@ -19,6 +19,7 @@ import ChatContainer from '../components/GroupPage/Chat/ChatContainer'
 import { postInvitation } from '../services/Group/inviteController'
 import { postChat } from '../services/Chat/chatController'
 import useWebSocket from '../hooks/WebSocket/useWebSocket'
+import { toggleFavorite } from '../redux/modules/groupReducer'
 
 const WEBSOCKET_URL = import.meta.env.VITE_VIEW_WEBSOCKET_URL
 
@@ -112,6 +113,19 @@ const GroupPage = () => {
       console.error('Client is not connected.')
     }
   }
+
+  const favoriteToggle = async () => {
+    try {
+      if (groupInfo.data.isFavorite) {
+        deleteFavoriteEvent()
+      } else {
+        addFavoriteEvent()
+      }
+      dispatch(toggleFavorite()) // 상태 업데이트를 위한 액션 디스패치
+    } catch (error) {
+      console.error(error)
+    }
+  }
   const addFavoriteEvent = async () => {
     try {
       await dispatch(postFavorite(userInfo.token, code))
@@ -177,8 +191,7 @@ const GroupPage = () => {
           weekData={weekData}
           scheduleList={scheduleList}
           groupInfo={groupInfo?.data}
-          addFavoriteEvent={addFavoriteEvent}
-          deleteFavoriteEvent={deleteFavoriteEvent}
+          favoriteToggle={favoriteToggle}
           deleteSchedule={deleteSchedule}
         />
         <FavoritesContainer />
@@ -190,7 +203,7 @@ const GroupPage = () => {
             chatData={chatData}
             setChatData={setChatData}
             sendChat={sendChat}
-            userCode={userInfo.user.userInfo.userCode}
+            userCode={userInfo?.user.userInfo.userCode}
           />
           <button
             type="button"

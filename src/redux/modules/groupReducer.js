@@ -5,6 +5,7 @@ const ADD_GROUP_SCHEDULE = 'ADD_GROUP_SCHEDULE'
 const REMOVE_GROUP_SCHEDULE = 'REMOVE_GROUP_SCHEDULE'
 const SET_GROUP_SCHEDULE = 'SET_GROUP_SCHEDULE'
 const ADD_GROUP_CAHT = 'ADD_GROUP_CAHT'
+const TOGGLE_FAVORITE = 'TOGGLE_FAVORITE'
 
 export const setGroup = group => ({
   type: SET_GROUP,
@@ -41,6 +42,10 @@ export const addGroupChat = data => ({
   payload: data
 })
 
+export const toggleFavorite = () => ({
+  type: TOGGLE_FAVORITE
+})
+
 const initialState = {
   groups: [],
   groupInfo: [],
@@ -64,6 +69,16 @@ const groupReducer = (state = initialState, action) => {
       return {
         ...state,
         groupInfo: action.payload
+      }
+    case TOGGLE_FAVORITE:
+      return {
+        ...state,
+        groupInfo: {
+          data: {
+            ...state.groupInfo.data,
+            isFavorite: !state.groupInfo.data.isFavorite
+          }
+        }
       }
     case SET_GROUP_SCHEDULE:
       return {
