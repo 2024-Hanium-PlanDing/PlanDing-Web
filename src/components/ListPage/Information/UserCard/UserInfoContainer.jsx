@@ -1,7 +1,11 @@
 import { useSelector } from 'react-redux'
 import LogoutBtn from './atom/LogoutBtn'
+import AlarmSvg1 from '../../../../assets/defaultAlarm.svg'
+import AlarmSvg2 from '../../../../assets/changeAlarm.svg'
 
-const UserInfoContainer = () => {
+import MessageSvg from '../../../../assets/defaultMessage.svg'
+
+const UserInfoContainer = ({ setAlarmModal, alarmState, setAlarmState }) => {
   const userInfo = useSelector(state => state.user.user)
 
   return (
@@ -24,6 +28,20 @@ const UserInfoContainer = () => {
         </div>
 
         <LogoutBtn />
+      </div>
+      <div className="flex gap-2.5 mt-5">
+        <img
+          src={alarmState ? AlarmSvg2 : AlarmSvg1}
+          alt="알람"
+          onClick={() => {
+            setAlarmModal(prv => !prv)
+            setAlarmState(false)
+          }}
+        />
+        <img
+          src={MessageSvg}
+          alt="메시지"
+        />
       </div>
     </div>
   )

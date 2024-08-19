@@ -16,6 +16,7 @@ const ListPage = () => {
   const userInfo = useSelector(state => state.user)
   const dispatch = useDispatch()
   const groupData = useSelector(state => state.group.groups)
+  const [alarmState, setAlarmState] = useState(false)
   const [todaySchedule, setTodaySchedule] = useState()
   const openModalHandle = () => {
     dispatch(openModal())
@@ -61,7 +62,10 @@ const ListPage = () => {
     sse.onmessage = e => {
       try {
         const data = JSON.parse(e.data)
-        console.log(data)
+
+        if (data.notificationType === 'INVITE') {
+          setAlarmState(true)
+        }
       } catch (error) {
         console.warn('Received non-JSON message:', e.data)
       }
@@ -83,7 +87,11 @@ const ListPage = () => {
   return (
     <div className="flex items-center justify-center w-screen h-screen bg-[#F6F6F6]">
       <div className="flex gap-2.5">
-        <InformationContainer todaySchedule={todaySchedule} />
+        <InformationContainer
+          todaySchedule={todaySchedule}
+          alarmState={alarmState}
+          setAlarmState={setAlarmState}
+        />
 
         <MainContentContainer
           openModal={openModalHandle}
