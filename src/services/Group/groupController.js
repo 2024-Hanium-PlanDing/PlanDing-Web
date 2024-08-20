@@ -2,6 +2,7 @@ import basicApi from '..'
 import {
   createGroup,
   groupInfo,
+  removeGroup,
   setGroup,
   setGroupSchedule
 } from '../../redux/modules/groupReducer'
@@ -52,6 +53,42 @@ export const createGroupList =
       throw error
     }
   }
+
+// 그룹 삭제
+
+export const deleteGroup = (token, groupCode) => async dispatch => {
+  try {
+    const response = await basicApi.delete(`/api/v1/group/${groupCode}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+
+    dispatch(removeGroup(groupCode))
+    return response.data
+  } catch (error) {
+    console.error('Error:', error)
+    throw error
+  }
+}
+
+//그룹 나가기
+
+export const leaveGroup = (token, groupCode) => async dispatch => {
+  try {
+    const response = await basicApi.delete(`/api/v1/group/leave/${groupCode}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+
+    dispatch(removeGroup(groupCode))
+    return response.data
+  } catch (error) {
+    console.error('Error:', error)
+    throw error
+  }
+}
 
 export const getGroupInfo = (token, groupCode) => async dispatch => {
   try {

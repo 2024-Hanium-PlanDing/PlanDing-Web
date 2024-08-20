@@ -1,5 +1,6 @@
 const SET_GROUP = 'SET_GROUP'
 const CREATE_GROUP = 'CREATE_GROUP'
+const REMOVE_GROUP = 'REMOVE_GROUP'
 const GROUP_INFO = 'GROUP_INFO'
 const ADD_GROUP_SCHEDULE = 'ADD_GROUP_SCHEDULE'
 const REMOVE_GROUP_SCHEDULE = 'REMOVE_GROUP_SCHEDULE'
@@ -15,6 +16,11 @@ export const setGroup = group => ({
 export const createGroup = title => ({
   type: CREATE_GROUP,
   payload: title
+})
+
+export const removeGroup = code => ({
+  type: REMOVE_GROUP,
+  payload: code
 })
 
 export const groupInfo = groupId => ({
@@ -64,6 +70,14 @@ const groupReducer = (state = initialState, action) => {
       return {
         ...state,
         groups: [...state.groups.data, action.payload]
+      }
+    case REMOVE_GROUP:
+      return {
+        ...state,
+        groups: {
+          ...state.groups,
+          data: state.groups.data.filter(group => group.code !== action.payload)
+        }
       }
     case GROUP_INFO:
       return {

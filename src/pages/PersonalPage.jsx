@@ -28,7 +28,6 @@ const PersonalPage = () => {
     dispatch(getPersonalSchedule(token, weekData.startDate, weekData.endDate))
   }, [token, weekData])
 
-  console.log(weekData)
   const createSchedule = () => {
     dispatch(postPersonalSchedule(token, scheduleData))
     setScheduleData({
