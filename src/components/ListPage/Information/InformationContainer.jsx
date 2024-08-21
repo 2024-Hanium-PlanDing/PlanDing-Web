@@ -17,7 +17,7 @@ const InformationContainer = ({
 }) => {
   const [alarmModal, setAlarmModal] = useState(false)
   const path = window.location.pathname
-
+  const pathEnd = path.split('/').pop()
   return (
     <div className="w-[320px] h-[848px] relative rounded-lg shadow-md bg-white py-5 flex-col gap-4 flex items-center ">
       <UserInfoContainer
@@ -29,7 +29,9 @@ const InformationContainer = ({
 
       <CustomCalendar />
       {path === '/list' && <TodayListContainer todaySchedule={todaySchedule} />}
-      {path === '/personal' || path.startsWith('/group/') ? (
+
+      {(path === '/personal' ||
+        (path.startsWith('/group/') && pathEnd !== 'todo')) && (
         <ScheduleCreateContainer
           scheduleData={scheduleData}
           onChangeData={onChangeData}
@@ -37,7 +39,7 @@ const InformationContainer = ({
           resetData={resetData}
           createSchedule={createSchedule}
         />
-      ) : null}
+      )}
     </div>
   )
 }

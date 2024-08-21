@@ -5,16 +5,25 @@ import { useNavigate } from 'react-router-dom'
 const MainTitle = ({ text, favoriteToggle, favoriteState }) => {
   const nav = useNavigate()
   const path = window.location.pathname
+  const endPath = path.split('/').pop()
+
   return (
     <div className="w-full h-[80px] pr-6 rounded-t-md font-bold text-[32px] flex items-center justify-between pl-4 bg-primary-200 text-white">
-      {path !== '/list' && (
-        <button
-          type="button"
-          alt="뒤로가기"
-          className="text-button"
-          onClick={() => nav('/list')}>
-          Home
-        </button>
+      {path !== '/list ' && (
+        <div className="flex gap-8">
+          <button
+            type="button"
+            alt="뒤로가기"
+            className="text-button"
+            onClick={() => nav('/list')}>
+            Home
+          </button>
+          <button
+            className="text-button"
+            onClick={endPath !== 'todo' ? () => nav('todo') : () => nav(-1)}>
+            {endPath !== 'todo' ? 'Todo' : 'back'}
+          </button>
+        </div>
       )}
 
       {text ?? 'Planding'}

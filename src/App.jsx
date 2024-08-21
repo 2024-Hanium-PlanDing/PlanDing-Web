@@ -6,6 +6,7 @@ import GroupPage from './pages/GroupPage'
 import './App.css'
 import LoginProgressPage from './pages/LoginProgressPage'
 import CreateGroupModal from './components/Modal/CreateGroupModal/CreateGroupModal'
+import ToDoPage from './pages/ToDoPage'
 
 function App() {
   return (
@@ -32,6 +33,10 @@ function App() {
           <Route
             path="/group/:code"
             element={<GroupPage />}
+          />
+          <Route
+            path="/group/:code/todo"
+            element={<ToDoPage />}
           />
         </Routes>
       </BrowserRouter>

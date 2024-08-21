@@ -10,16 +10,13 @@ import {
   getGroupSchedule
 } from '../services/Group/groupController'
 import GroupContainer from '../components/GroupPage/GroupContainer'
-import {
-  deleteFavorite,
-  postFavorite
-} from '../services/Favorite/favoriteController'
 
 import ChatContainer from '../components/GroupPage/Chat/ChatContainer'
 import { postInvitation } from '../services/Group/inviteController'
 import { postChat } from '../services/Chat/chatController'
 import useWebSocket from '../hooks/WebSocket/useWebSocket'
-import { toggleFavorite } from '../redux/modules/groupReducer'
+
+import useFavorite from '../hooks/useFavorite'
 
 const WEBSOCKET_URL = import.meta.env.VITE_VIEW_WEBSOCKET_URL
 
@@ -114,34 +111,7 @@ const GroupPage = () => {
     }
   }
 
-  const favoriteToggle = async () => {
-    try {
-      if (groupInfo.data.isFavorite) {
-        deleteFavoriteEvent()
-      } else {
-        addFavoriteEvent()
-      }
-      dispatch(toggleFavorite()) // 상태 업데이트를 위한 액션 디스패치
-    } catch (error) {
-      console.error(error)
-    }
-  }
-  const addFavoriteEvent = async () => {
-    try {
-      await dispatch(postFavorite(userInfo.token, code))
-      alert('즐겨찾기 추가')
-    } catch (error) {
-      console.error('즐겨찾기 추가 중 오류 발생:', error)
-    }
-  }
-  const deleteFavoriteEvent = async () => {
-    try {
-      await dispatch(deleteFavorite(userInfo.token, code))
-      alert('즐겨찾기 삭제')
-    } catch (error) {
-      console.error('즐겨찾기 추가 중 오류 발생:', error)
-    }
-  }
+  const { favoriteToggle } = useFavorite(groupInfo, dispatch, userInfo, code)
 
   const toggleChatState = () => {
     setChatState(pre => !pre)
