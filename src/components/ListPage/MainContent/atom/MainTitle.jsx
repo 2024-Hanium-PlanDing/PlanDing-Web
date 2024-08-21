@@ -9,7 +9,7 @@ const MainTitle = ({ text, favoriteToggle, favoriteState }) => {
 
   return (
     <div className="w-full h-[80px] pr-6 rounded-t-md font-bold text-[32px] flex items-center justify-between pl-4 bg-primary-200 text-white">
-      {path !== '/list ' && (
+      {path !== '/list' && (
         <div className="flex gap-8">
           <button
             type="button"

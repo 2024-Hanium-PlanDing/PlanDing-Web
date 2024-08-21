@@ -27,7 +27,7 @@ const GroupContainer = ({
           <p className="text-subtitle-1 text-primary-500">{formattedDate}</p>
           <button
             type="button"
-            className="w-[117px] h-[40px] flex justify-center items-center gap-2 bg-primary-50 rounded-lg"
+            className="w-[117px] h-[40px] flex justify-center items-center gap-3 bg-primary-50 rounded-lg"
             onClick={inviteHandle}>
             <img
               src={AddPerson}

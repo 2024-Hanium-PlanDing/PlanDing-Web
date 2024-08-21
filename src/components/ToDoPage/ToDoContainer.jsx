@@ -1,4 +1,8 @@
 import MainTitle from '../ListPage/MainContent/atom/MainTitle'
+import SubTitle from '../ListPage/MainContent/atom/SubTitle'
+import Plus from '../../assets/plus.svg'
+import ToDoItem from './atom/ToDoItem'
+import ItemHeader from './atom/ItemHeader'
 
 const ToDoContainer = ({ favoriteToggle, groupInfo }) => {
   return (
@@ -6,10 +10,26 @@ const ToDoContainer = ({ favoriteToggle, groupInfo }) => {
       <div className="w-[972px] h-full flex flex-col gap-8 border-2 rounded-t-md border-neutrals-40">
         <div>
           <MainTitle
-            text={groupInfo?.name}
             favoriteToggle={favoriteToggle}
             favoriteState={groupInfo?.isFavorite}
           />
+          <SubTitle text={`${groupInfo?.data.name} 일정표`} />
+          <div className="mt-5 mb-4 mx-5 flex justify-between items-center">
+            <p className="text-subtitle-3 text-[#303494]">일정 목록</p>
+            <button
+              type="button"
+              className="w-[109px] h-[40px] flex justify-center items-center gap-1 bg-primary-50 rounded-lg">
+              <img
+                src={Plus}
+                alt="친구추가"
+              />
+              <p className="text-button text-primary-400">추가하기</p>
+            </button>
+          </div>
+          <div className="w-[932px] h-[579px] mx-5">
+            <ItemHeader />
+            <ToDoItem />
+          </div>
         </div>
       </div>
     </div>
