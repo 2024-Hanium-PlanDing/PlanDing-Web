@@ -69,7 +69,10 @@ const groupReducer = (state = initialState, action) => {
     case CREATE_GROUP:
       return {
         ...state,
-        groups: [...state.groups.data, action.payload]
+        groups: {
+          ...state.groups,
+          data: [action.payload, ...state.groups.data]
+        }
       }
     case REMOVE_GROUP:
       return {

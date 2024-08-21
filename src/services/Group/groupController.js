@@ -43,7 +43,7 @@ export const createGroupList =
         }
       })
 
-      dispatch(createGroup(response.data))
+      dispatch(createGroup(response.data.data))
       return response.data
     } catch (error) {
       console.error(
