@@ -1,16 +1,19 @@
 const OPEN_MODAL = 'OPEN_MODAL'
 const CLOSE_MODAL = 'CLOSE_MODAL'
 
-export const openModal = () => ({
-  type: OPEN_MODAL
+export const openModal = modalName => ({
+  type: OPEN_MODAL,
+  payload: modalName
 })
 
-export const closeModal = () => ({
-  type: CLOSE_MODAL
+export const closeModal = modalName => ({
+  type: CLOSE_MODAL,
+  payload: modalName
 })
 
 const initialState = {
-  isOpen: false
+  createGroupModal: false,
+  createTodoModal: false
 }
 
 const modalReducer = (state = initialState, action) => {
@@ -18,12 +21,12 @@ const modalReducer = (state = initialState, action) => {
     case OPEN_MODAL:
       return {
         ...state,
-        isOpen: true
+        [action.payload]: true
       }
     case CLOSE_MODAL:
       return {
         ...state,
-        isOpen: false
+        [action.payload]: false
       }
     default:
       return state

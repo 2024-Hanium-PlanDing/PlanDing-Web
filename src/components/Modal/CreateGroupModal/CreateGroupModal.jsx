@@ -8,7 +8,7 @@ import CreateGroupText from './atom/CreateGroupText'
 
 const CreateGroupModal = () => {
   const dispatch = useDispatch()
-  const modalState = useSelector(state => state.modal.isOpen)
+  const modalState = useSelector(state => state.modal.createGroupModal)
   const userInfo = useSelector(state => state.user)
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
@@ -24,7 +24,7 @@ const CreateGroupModal = () => {
         await dispatch(
           createGroupList(userInfo.token, title, description, file)
         )
-        dispatch(closeModal())
+        dispatch(closeModal('createGroupModal'))
         setTitle('')
         setDescription('')
         setFile(null)
@@ -37,7 +37,7 @@ const CreateGroupModal = () => {
   }
 
   const closeModalHandle = () => {
-    dispatch(closeModal())
+    dispatch(closeModal('createGroupModal'))
   }
 
   return (

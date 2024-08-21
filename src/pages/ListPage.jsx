@@ -23,7 +23,7 @@ const ListPage = () => {
   const [alarmState, setAlarmState] = useState(false)
   const [todaySchedule, setTodaySchedule] = useState()
   const openModalHandle = () => {
-    dispatch(openModal())
+    dispatch(openModal('createGroupModal'))
   }
   useEffect(() => {
     const fetchData = async () => {
