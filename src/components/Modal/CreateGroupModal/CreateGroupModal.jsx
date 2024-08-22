@@ -5,6 +5,7 @@ import { createGroupList } from '../../../services/Group/groupController'
 import CreateGroupHeader from './atom/CreateGroupHeader'
 import CreateGroupThumbnail from './atom/CreateGroupThumbnail'
 import CreateGroupText from './atom/CreateGroupText'
+import SelectBox from '../SelectBox'
 
 const CreateGroupModal = () => {
   const dispatch = useDispatch()
@@ -52,18 +53,11 @@ const CreateGroupModal = () => {
             description={description}
             setDescription={setDescription}
           />
-          <div className="flex gap-2.5 justify-end">
-            <button
-              onClick={handleSubmit}
-              className="w-[105px] h-[34px] bg-primary-300 rounded-sm text-white flex justify-center items-center text-button">
-              그룹 만들기
-            </button>
-            <button
-              className="w-[65px] h-[34px] bg-white border border-primary-100 rounded-sm text-primary-200 text-button"
-              onClick={closeModalHandle}>
-              취소
-            </button>
-          </div>
+          <SelectBox
+            handleSubmit={handleSubmit}
+            closeModalHandle={closeModalHandle}
+            text="그룹 만들기"
+          />
         </div>
       </div>
     </div>

@@ -11,12 +11,8 @@ const ToDoPage = () => {
   const userInfo = useSelector(state => state.user)
   const { favoriteToggle } = useFavorite(groupInfo, dispatch, userInfo)
 
-  const createTodoHandler = async () => {
-    try {
-      await openModal('createTodoModal')
-    } catch (error) {
-      console.error(error)
-    }
+  const createTodoHandler = () => {
+    dispatch(openModal('createTodoModal'))
   }
 
   return (

@@ -1,10 +1,16 @@
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import TodoForm from './TodoForm'
+import PeopleSettings from './PeopleSettings'
+import { closeModal } from '../../../redux/modules/modalReducer'
 
 const CreateTodoModal = () => {
   const modalState = useSelector(state => state.modal.createTodoModal)
-  if (modalState) {
+  const dispatch = useDispatch()
+  if (!modalState) {
     return null
+  }
+  const closeModalHandle = () => {
+    dispatch(closeModal('createTodoModal'))
   }
   return (
     <div className="fixed top-0 left-0 w-screen h-screen bg-[rgba(0,0,0,0.5)] flex justify-center items-center z-50">
@@ -16,8 +22,9 @@ const CreateTodoModal = () => {
               생성할 그룹의 정보를 입력해 주세요
             </p>
           </div>
-          <div className="flex mt-6">
+          <div className="flex mt-6 gap-6">
             <TodoForm />
+            <PeopleSettings closeModalHandle={closeModalHandle} />
           </div>
         </div>
       </div>
