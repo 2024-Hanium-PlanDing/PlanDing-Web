@@ -16,7 +16,9 @@ const CreateTodoModal = () => {
               생성할 그룹의 정보를 입력해 주세요
             </p>
           </div>
-          <TodoForm />
+          <div className="flex mt-6">
+            <TodoForm />
+          </div>
         </div>
       </div>
     </div>
