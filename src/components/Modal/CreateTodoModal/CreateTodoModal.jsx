@@ -2,9 +2,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import TodoForm from './TodoForm'
 import PeopleSettings from './PeopleSettings'
 import { closeModal } from '../../../redux/modules/modalReducer'
+import { useState } from 'react'
 
 const CreateTodoModal = () => {
   const modalState = useSelector(state => state.modal.createTodoModal)
+  const groupInfo = useSelector(state => state.group.groupInfo)
+  const [selectedUsers, setSelectedUsers] = useState([])
+
   const dispatch = useDispatch()
   if (!modalState) {
     return null
@@ -12,6 +16,18 @@ const CreateTodoModal = () => {
   const closeModalHandle = () => {
     dispatch(closeModal('createTodoModal'))
   }
+
+  const handleSelectUser = user => {
+    setSelectedUsers(prev => {
+      if (prev.includes(user)) {
+        return prev.filter(u => u !== user)
+      } else {
+        return [...prev, user]
+      }
+    })
+  }
+
+  console.log(selectedUsers)
   return (
     <div className="fixed top-0 left-0 w-screen h-screen bg-[rgba(0,0,0,0.5)] flex justify-center items-center z-50">
       <div className="w-[864px] h-[591px] bg-[#FFFFFF] rounded-md p-2">
@@ -24,7 +40,12 @@ const CreateTodoModal = () => {
           </div>
           <div className="flex mt-6 gap-6">
             <TodoForm />
-            <PeopleSettings closeModalHandle={closeModalHandle} />
+            <PeopleSettings
+              closeModalHandle={closeModalHandle}
+              userData={groupInfo.data.users}
+              selectedUsers={selectedUsers}
+              onSelectUser={handleSelectUser}
+            />
           </div>
         </div>
       </div>
