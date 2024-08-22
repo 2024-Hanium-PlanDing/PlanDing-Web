@@ -5,6 +5,7 @@ import group from './groupReducer'
 import personal from './personalReducer'
 import date from './calendarReducer'
 import favorite from './favoriteReducer'
+import groupTodo from './groupTodoReducer'
 
 const rootReducer = combineReducers({
   user,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   group,
   personal,
   date,
-  favorite
+  favorite,
+  groupTodo
 })
 
 export default rootReducer

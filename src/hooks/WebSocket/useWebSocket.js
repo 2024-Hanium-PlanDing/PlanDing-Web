@@ -33,10 +33,15 @@ const useWebSocket = (token, code, WEBSOCKET_URL) => {
             console.log(messageBody)
             switch (messageBody.data.action) {
               case 'CREATE':
-                dispatch(addGroupSchedule(messageBody.data))
+                if (messageBody.data.type === 'GROUP') {
+                  dispatch(addGroupSchedule(messageBody.data))
+                }
+
                 break
               case 'DELETE':
-                dispatch(removeGroupSchedule(messageBody.data.id))
+                if (messageBody.data.type === 'GROUP') {
+                  dispatch(removeGroupSchedule(messageBody.data.id))
+                }
                 break
               default:
                 console.warn('Unknown action:', messageBody.data.action)

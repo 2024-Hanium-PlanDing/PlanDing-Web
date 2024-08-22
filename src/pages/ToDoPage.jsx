@@ -73,9 +73,6 @@ const ToDoPage = () => {
       delete groupData.time
       delete groupData.date
 
-      console.log(groupData)
-
-      console.log(groupData)
       client.publish({
         destination: `/pub/planner/create/${groupInfo.data.groupCode}`,
         headers: {
