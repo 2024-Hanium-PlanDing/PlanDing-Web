@@ -1,21 +1,21 @@
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import TodoForm from './TodoForm'
 import PeopleSettings from './PeopleSettings'
-import { closeModal } from '../../../redux/modules/modalReducer'
-import { useState } from 'react'
 
-const CreateTodoModal = () => {
+const CreateTodoModal = ({
+  createTodo,
+  onChangeDate,
+  onChangeData,
+  closeModalHandle,
+  selectedUsers,
+  setSelectedUsers
+}) => {
   const modalState = useSelector(state => state.modal.createTodoModal)
   const groupInfo = useSelector(state => state.group.groupInfo)
-  const [selectedUsers, setSelectedUsers] = useState([])
   const scheduleList = useSelector(state => state.group.groupSchedule)
 
-  const dispatch = useDispatch()
   if (!modalState) {
     return null
-  }
-  const closeModalHandle = () => {
-    dispatch(closeModal('createTodoModal'))
   }
 
   const handleSelectUser = user => {
@@ -39,12 +39,17 @@ const CreateTodoModal = () => {
             </p>
           </div>
           <div className="flex mt-6 gap-6">
-            <TodoForm scheduleList={scheduleList} />
+            <TodoForm
+              scheduleList={scheduleList}
+              onChangeDate={onChangeDate}
+              onChangeData={onChangeData}
+            />
             <PeopleSettings
               closeModalHandle={closeModalHandle}
               userData={groupInfo.data.users}
               selectedUsers={selectedUsers}
               onSelectUser={handleSelectUser}
+              createTodo={createTodo}
             />
           </div>
         </div>

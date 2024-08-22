@@ -5,11 +5,12 @@ import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
 
-const SelectTodo = ({ scheduleList }) => {
+const SelectTodo = ({ scheduleList, onChangeData }) => {
   const [scheduleId, setScheduleId] = React.useState('')
 
-  const handleChange = event => {
-    setScheduleId(event.target.value)
+  const handleChange = e => {
+    onChangeData(e)
+    setScheduleId(e.target.value)
   }
 
   return (
@@ -20,7 +21,8 @@ const SelectTodo = ({ scheduleList }) => {
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={scheduleId}
-          label="Age"
+          name="scheduleId"
+          label="scheduleId"
           onChange={handleChange}>
           {scheduleList.map((data, index) => (
             <MenuItem

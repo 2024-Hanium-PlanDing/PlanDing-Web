@@ -4,7 +4,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { TimePicker } from '@mui/x-date-pickers/TimePicker'
 import { DatePicker } from '@mui/x-date-pickers'
 
-const DateSelect = () => {
+const DateSelect = ({ onChangeDate, onChangeData }) => {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer components={['TimePicker', 'DatePicker']}>
@@ -20,6 +20,7 @@ const DateSelect = () => {
                 fontSize: '12px'
               }
             }}
+            onChange={date => onChangeDate(date)}
           />
         </DemoItem>
         <DemoItem>
@@ -35,6 +36,10 @@ const DateSelect = () => {
                 padding: '8.5px 14px',
                 fontSize: '12px'
               }
+            }}
+            onChange={time => {
+              const formattedTime = `${String(time.hour()).padStart(2, '0')}:00:00`
+              onChangeData({ target: { name: 'time', value: formattedTime } })
             }}
           />
         </DemoItem>

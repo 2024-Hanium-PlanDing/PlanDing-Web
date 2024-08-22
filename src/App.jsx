@@ -7,14 +7,13 @@ import './App.css'
 import LoginProgressPage from './pages/LoginProgressPage'
 import CreateGroupModal from './components/Modal/CreateGroupModal/CreateGroupModal'
 import ToDoPage from './pages/ToDoPage'
-import CreateTodoModal from './components/Modal/CreateTodoModal/CreateTodoModal'
 
 function App() {
   return (
     <div>
       <BrowserRouter>
         <CreateGroupModal />
-        <CreateTodoModal />
+
         <Routes>
           <Route
             path="/"

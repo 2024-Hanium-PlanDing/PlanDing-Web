@@ -5,7 +5,8 @@ const PeopleSettings = ({
   closeModalHandle,
   userData,
   onSelectUser,
-  selectedUsers
+  selectedUsers,
+  createTodo
 }) => {
   return (
     <div className="w-full h-[434px] flex flex-col gap-2.5">
@@ -37,6 +38,7 @@ const PeopleSettings = ({
 
       <SelectBox
         text="일정 만들기"
+        handleSubmit={createTodo}
         closeModalHandle={closeModalHandle}
       />
     </div>
