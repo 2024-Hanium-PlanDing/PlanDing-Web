@@ -8,6 +8,7 @@ const CreateTodoModal = () => {
   const modalState = useSelector(state => state.modal.createTodoModal)
   const groupInfo = useSelector(state => state.group.groupInfo)
   const [selectedUsers, setSelectedUsers] = useState([])
+  const scheduleList = useSelector(state => state.group.groupSchedule)
 
   const dispatch = useDispatch()
   if (!modalState) {
@@ -27,7 +28,6 @@ const CreateTodoModal = () => {
     })
   }
 
-  console.log(selectedUsers)
   return (
     <div className="fixed top-0 left-0 w-screen h-screen bg-[rgba(0,0,0,0.5)] flex justify-center items-center z-50">
       <div className="w-[864px] h-[591px] bg-[#FFFFFF] rounded-md p-2">
@@ -39,7 +39,7 @@ const CreateTodoModal = () => {
             </p>
           </div>
           <div className="flex mt-6 gap-6">
-            <TodoForm />
+            <TodoForm scheduleList={scheduleList} />
             <PeopleSettings
               closeModalHandle={closeModalHandle}
               userData={groupInfo.data.users}
