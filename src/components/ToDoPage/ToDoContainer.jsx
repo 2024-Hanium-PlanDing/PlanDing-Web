@@ -4,21 +4,22 @@ import Plus from '../../assets/plus.svg'
 import ToDoItem from './atom/ToDoItem'
 import ItemHeader from './atom/ItemHeader'
 
-const ToDoContainer = ({ favoriteToggle, groupInfo }) => {
+const ToDoContainer = ({ favoriteToggle, groupInfo, createTodoHandler }) => {
   return (
     <div className="w-[1012px] h-[848px] rounded-lg shadow-md p-5 bg-white">
       <div className="w-[972px] h-full flex flex-col gap-8 border-2 rounded-t-md border-neutrals-40">
         <div>
           <MainTitle
             favoriteToggle={favoriteToggle}
-            favoriteState={groupInfo?.isFavorite}
+            favoriteState={groupInfo?.data.isFavorite}
           />
           <SubTitle text={`${groupInfo?.data.name} 일정표`} />
           <div className="mt-5 mb-4 mx-5 flex justify-between items-center">
             <p className="text-subtitle-3 text-[#303494]">일정 목록</p>
             <button
               type="button"
-              className="w-[109px] h-[40px] flex justify-center items-center gap-1 bg-primary-50 rounded-lg">
+              onClick={createTodoHandler}
+              className="w-[109px] h-[40px] flex justify-center items-center gap-1 bg-primary-50 rounded-lg cursor-pointer">
               <img
                 src={Plus}
                 alt="친구추가"

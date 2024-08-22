@@ -3,12 +3,21 @@ import FavoritesContainer from '../components/ListPage/Favorites/FavoritesContai
 import InformationContainer from '../components/ListPage/Information/InformationContainer'
 import ToDoContainer from '../components/ToDoPage/ToDoContainer'
 import useFavorite from '../hooks/useFavorite'
+import { openModal } from '../redux/modules/modalReducer'
 
 const ToDoPage = () => {
   const groupInfo = useSelector(state => state.group.groupInfo)
   const dispatch = useDispatch()
   const userInfo = useSelector(state => state.user)
   const { favoriteToggle } = useFavorite(groupInfo, dispatch, userInfo)
+
+  const createTodoHandler = async () => {
+    try {
+      await openModal('createTodoModal')
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   return (
     <div className="flex items-center justify-center w-screen h-screen bg-[#F6F6F6]">
@@ -17,6 +26,7 @@ const ToDoPage = () => {
         <ToDoContainer
           favoriteToggle={favoriteToggle}
           groupInfo={groupInfo}
+          createTodoHandler={createTodoHandler}
         />
         <FavoritesContainer />
       </div>
