@@ -18,6 +18,8 @@ import { postChat } from '../services/Chat/chatController'
 import useWebSocket from '../hooks/WebSocket/useWebSocket'
 
 import useFavorite from '../hooks/useFavorite'
+import InviteGroupModal from '../components/Modal/InviteGroupModal/InviteGroupModal'
+import { closeModal, openModal } from '../redux/modules/modalReducer'
 
 const WEBSOCKET_URL = import.meta.env.VITE_VIEW_WEBSOCKET_URL
 
@@ -29,6 +31,8 @@ const GroupPage = () => {
   const scheduleList = useSelector(state => state.group.groupSchedule)
   const groupInfo = useSelector(state => state.group.groupInfo)
   const groupChatData = useSelector(state => state.group.groupChat)
+
+  const modalState = useSelector(state => state.modal.inviteGroupModal)
 
   const [chatState, setChatState] = useState(false)
   const [chatData, setChatData] = useState('')
@@ -59,7 +63,7 @@ const GroupPage = () => {
         weekData.endDate
       )
     )
-  }, [weekData.startDate, weekData.endDate])
+  }, [weekData.startDate, weekData.endDate, code])
 
   const sendMessage = () => {
     if (client && client.active) {
@@ -117,7 +121,6 @@ const GroupPage = () => {
   const toggleChatState = () => {
     setChatState(pre => !pre)
   }
-
   const sendChat = async () => {
     if (chatData) {
       await postChat(userInfo.token, chatData, code)
@@ -125,30 +128,43 @@ const GroupPage = () => {
     }
   }
 
+  const openInviteModal = async () => {
+    await dispatch(openModal('inviteGroupModal'))
+  }
+  const closeModalHandle = () => {
+    dispatch(closeModal('inviteGroupModal'))
+  }
   const inviteHandle = async () => {
-    const userCode = inputRef.current.value
-    try {
-      await postInvitation(userInfo?.token, groupInfo.data.id, userCode)
-      alert('초대 했습니다.')
-    } catch (error) {
-      error.log(error)
+    if (inputRef.current && inputRef.current.value) {
+      const userCode = inputRef.current.value.trim()
+      if (!userCode) {
+        alert('사용자 코드를 입력해주세요.')
+        return
+      }
+      try {
+        await postInvitation(
+          userInfo?.token,
+          groupInfo.data.groupCode,
+          userCode
+        )
+        alert('초대 했습니다.')
+        closeModalHandle()
+      } catch (error) {
+        console.error('초대하는 중 오류가 발생했습니다:', error)
+      }
+    } else {
+      alert('사용자 코드를 입력할 수 없습니다.')
     }
   }
 
   return (
     <div className="flex items-center justify-center w-screen h-screen bg-[#F6F6F6]">
-      {/* <div>
-        <input
-          ref={inputRef}
-          className="border border-black"
-          type="text"
-        />
-        <button
-          type="button"
-          onClick={inviteHandle}>
-          초대하기
-        </button>
-      </div> */}
+      <InviteGroupModal
+        inputRef={inputRef}
+        inviteHandle={inviteHandle}
+        modalState={modalState}
+        closeModalHandle={closeModalHandle}
+      />
 
       <div className="flex gap-2.5">
         <InformationContainer
@@ -164,7 +180,7 @@ const GroupPage = () => {
           groupInfo={groupInfo?.data}
           favoriteToggle={favoriteToggle}
           deleteSchedule={deleteSchedule}
-          inviteHandle={inviteHandle}
+          openInviteModal={openInviteModal}
         />
         <div className="flex flex-col gap-2 items-center">
           <FavoritesContainer />

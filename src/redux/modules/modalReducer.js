@@ -13,7 +13,8 @@ export const closeModal = modalName => ({
 
 const initialState = {
   createGroupModal: false,
-  createTodoModal: false
+  createTodoModal: false,
+  inviteGroupModal: false
 }
 
 const modalReducer = (state = initialState, action) => {

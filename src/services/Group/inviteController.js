@@ -13,9 +13,9 @@ export const getInvitation = async token => {
   }
 }
 
-export const postInvitation = async (token, groupId, userCode) => {
+export const postInvitation = async (token, groupCode, userCode) => {
   const data = {
-    groupId,
+    groupCode,
     userCode
   }
   try {
