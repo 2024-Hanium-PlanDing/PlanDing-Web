@@ -6,6 +6,10 @@ import {
   addGroupSchedule,
   removeGroupSchedule
 } from '../../redux/modules/groupReducer'
+import {
+  addGroupTodo,
+  removeGroupTodo
+} from '../../redux/modules/groupTodoReducer'
 
 const useWebSocket = (token, code, WEBSOCKET_URL) => {
   const [client, setClient] = useState(null)
@@ -36,11 +40,17 @@ const useWebSocket = (token, code, WEBSOCKET_URL) => {
                 if (messageBody.data.type === 'GROUP') {
                   dispatch(addGroupSchedule(messageBody.data))
                 }
+                if (messageBody.data.tye === 'PLANNER') {
+                  dispatch(addGroupTodo(messageBody.data))
+                }
 
                 break
               case 'DELETE':
                 if (messageBody.data.type === 'GROUP') {
                   dispatch(removeGroupSchedule(messageBody.data.id))
+                }
+                if (messageBody.data.type === 'PLANNER') {
+                  dispatch(removeGroupTodo(messageBody.data.id))
                 }
                 break
               default:

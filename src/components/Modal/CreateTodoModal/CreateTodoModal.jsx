@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux'
 import TodoForm from './TodoForm'
 import PeopleSettings from './PeopleSettings'
+import { useEffect } from 'react'
 
 const CreateTodoModal = ({
   createTodo,
@@ -13,6 +14,12 @@ const CreateTodoModal = ({
   const modalState = useSelector(state => state.modal.createTodoModal)
   const groupInfo = useSelector(state => state.group.groupInfo)
   const scheduleList = useSelector(state => state.group.groupSchedule)
+  // 모달이 열릴 때마다 selectedUsers 초기화
+  useEffect(() => {
+    if (modalState) {
+      setSelectedUsers([])
+    }
+  }, [modalState, setSelectedUsers])
 
   if (!modalState) {
     return null
