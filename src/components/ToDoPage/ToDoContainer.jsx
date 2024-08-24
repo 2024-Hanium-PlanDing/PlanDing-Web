@@ -30,8 +30,10 @@ const ToDoContainer = ({ favoriteToggle, groupInfo, createTodoHandler }) => {
           </div>
           <div className="w-[932px] h-[579px] mx-5">
             <ItemHeader />
-            <TodoParent />
-            <TodoParent />
+            <div className="flex flex-col gap-2">
+              <TodoParent />
+              <TodoParent />
+            </div>
           </div>
         </div>
       </div>

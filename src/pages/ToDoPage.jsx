@@ -49,6 +49,7 @@ const ToDoPage = () => {
     time: null,
     date: null
   })
+  console.log(weekData)
 
   const createTodoHandler = () => {
     dispatch(openModal('createTodoModal'))

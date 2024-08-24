@@ -2,13 +2,13 @@ import StarOn from '../../../../assets/starOn.svg'
 import StarOff from '../../../../assets/StarOff.svg'
 import { useNavigate } from 'react-router-dom'
 
-const MainTitle = ({ text, favoriteToggle, favoriteState }) => {
+const MainTitle = ({ favoriteToggle, favoriteState }) => {
   const nav = useNavigate()
   const path = window.location.pathname
   const endPath = path.split('/').pop()
 
   return (
-    <div className="w-full h-[80px] pr-6 rounded-t-md font-bold text-[32px] flex items-center justify-between pl-4 bg-primary-200 text-white">
+    <div className="w-full h-[80px] pr-6 rounded-t-md font-bold text-[32px] flex items-center justify-between pl-4 text-black">
       {path !== '/list' && (
         <div className="flex gap-8">
           <button
@@ -25,8 +25,6 @@ const MainTitle = ({ text, favoriteToggle, favoriteState }) => {
           </button>
         </div>
       )}
-
-      {text ?? 'Planding'}
       {favoriteToggle && (
         <button
           onClick={favoriteToggle}
