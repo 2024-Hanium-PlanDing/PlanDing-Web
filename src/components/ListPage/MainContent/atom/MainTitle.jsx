@@ -1,28 +1,50 @@
 import StarOn from '../../../../assets/starOn.svg'
 import StarOff from '../../../../assets/StarOff.svg'
 import { useNavigate } from 'react-router-dom'
+import LogoImg from '../../../../assets/logoImg.svg'
+import SwitchBtn from './SwitchBtn'
 
 const MainTitle = ({ favoriteToggle, favoriteState }) => {
   const nav = useNavigate()
   const path = window.location.pathname
-  const endPath = path.split('/').pop()
+  const endPath = path.includes('todo') ? 'todo' : ''
+  const basePath = path.split('/').slice(0, 3).join('/') // 그룹 코드가 포함된 기본 경로
 
   return (
-    <div className="w-full h-[80px] pr-6 rounded-t-md font-bold text-[32px] flex items-center justify-between pl-4 text-black">
+    <div className="w-full h-[80px] pr-6 rounded-t-md font-bold text-[32px] flex items-center justify-between pl-4 text-black border-b border-b-neutrals-80 relative">
       {path !== '/list' && (
         <div className="flex gap-8">
           <button
             type="button"
-            alt="뒤로가기"
+            alt="홈"
             className="text-button"
             onClick={() => nav('/list')}>
-            Home
+            <img
+              src={LogoImg}
+              alt="홈"
+            />
           </button>
-          <button
+          <div className="flex absolute bottom-0 left-[8%]">
+            <SwitchBtn
+              type="스케줄"
+              endPath={endPath}
+              onClick={() =>
+                nav(`${basePath}${path.includes('todo') ? '' : '/todo'}`)
+              }
+            />
+            <SwitchBtn
+              type="플래너"
+              endPath={endPath}
+              onClick={() =>
+                nav(`${basePath}${path.includes('todo') ? '' : '/todo'}`)
+              }
+            />
+          </div>
+          {/* <button
             className="text-button"
             onClick={endPath !== 'todo' ? () => nav('todo') : () => nav(-1)}>
             {endPath !== 'todo' ? 'Todo' : 'back'}
-          </button>
+          </button> */}
         </div>
       )}
       {favoriteToggle && (
@@ -33,7 +55,7 @@ const MainTitle = ({ favoriteToggle, favoriteState }) => {
             src={favoriteState ? StarOn : StarOff}
             alt="즐겨찾기"
           />
-          Favorite
+          즐겨찾기
         </button>
       )}
     </div>
