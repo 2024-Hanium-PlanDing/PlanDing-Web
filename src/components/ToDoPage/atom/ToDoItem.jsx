@@ -1,25 +1,28 @@
+import EditBtn from '../../../assets/editBtn.svg'
+
 const ToDoItem = () => {
   return (
-    <div className="w-[932px] h-[42px] px-4 flex items-center text-caption text-neutrals-900">
-      <div className="w-[37px] h-full flex justify-center items-center">1</div>
-      <div className="w-[246px] h-full flex justify-center items-center">
-        일정 제목
+    <div className="w-[904px] h-[41px] px-6 py-1 gap-1 border-y border-y-neutrals-40 flex items-center text-caption text-neutrals-900 bg-neutrals-20">
+      <div className="w-[472px] h-full flex  items-center">일정 제목</div>
+      <div className="w-[78px] h-full flex justify-center items-center">
+        관리자 이름
+      </div>
+
+      <div className="w-[71px] h-full flex justify-center items-center">
+        참여인원
       </div>
       <div className="w-[80px] h-full flex justify-center items-center">
         진행중
       </div>
-      <div className="w-[217px] h-full flex justify-center items-center">
-        2024년 8월 18일 00시 까지
+      <div className="w-[111px] h-full flex justify-center items-center">
+        8월 16일 21 시까지
       </div>
-      <div className="w-[120px] h-full flex justify-center items-center">
-        관리자 이름
-      </div>
-      <div className="w-[120px] h-full flex justify-center items-center">
-        참여인원
-      </div>
-      <div className="w-[80px] h-full flex justify-center items-center">
-        상세보기
-      </div>
+      <button className="w-6 h-6 ml-2">
+        <img
+          src={EditBtn}
+          alt="추가 기능"
+        />
+      </button>
     </div>
   )
 }

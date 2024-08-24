@@ -6,6 +6,9 @@ const TodoForm = ({ scheduleList, onChangeData, onChangeDate }) => {
   return (
     <from className="w-[392px] h-[434px] flex flex-col gap-6">
       <div>
+        <label className="text-body text-neutral-600 mb-3 flex flex-col">
+          스케줄 선택
+        </label>
         <SelectTodo
           scheduleList={scheduleList}
           onChangeData={onChangeData}
@@ -62,7 +65,7 @@ const TodoForm = ({ scheduleList, onChangeData, onChangeDate }) => {
           일정 상세 설명
         </label>
         <textarea
-          className="w-[392px] h-[80px] border border-neutrals-80 rounded-lg resize-none p-2.5 text-button"
+          className="w-[392px] h-[100px] border border-neutrals-80 rounded-lg resize-none p-2.5 text-button"
           placeholder="설명을 적어주세요"
           name="content"
           onChange={onChangeData}

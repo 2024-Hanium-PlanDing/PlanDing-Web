@@ -8,7 +8,7 @@ const GroupContainer = ({
   groupInfo,
   favoriteToggle,
   deleteSchedule,
-  inviteHandle
+  openInviteModal
 }) => {
   const [year, month] = weekData.startDate.split('-')
   const formattedDate = `${year}년 ${parseInt(month)}월`
@@ -28,7 +28,7 @@ const GroupContainer = ({
           <button
             type="button"
             className="w-[117px] h-[40px] flex justify-center items-center gap-3 bg-primary-50 rounded-lg"
-            onClick={inviteHandle}>
+            onClick={openInviteModal}>
             <img
               src={AddPerson}
               alt="친구추가"

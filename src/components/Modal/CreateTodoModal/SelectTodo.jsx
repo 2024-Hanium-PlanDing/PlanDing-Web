@@ -16,14 +16,19 @@ const SelectTodo = ({ scheduleList, onChangeData }) => {
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">List</InputLabel>
+        <InputLabel id="demo-simple-select-label">스케줄</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={scheduleId}
           name="scheduleId"
           label="scheduleId"
-          onChange={handleChange}>
+          onChange={handleChange}
+          sx={{
+            fontSize: '14px',
+            height: '40px',
+            width: '392px'
+          }}>
           {scheduleList.map((data, index) => (
             <MenuItem
               value={data.id}

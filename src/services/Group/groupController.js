@@ -6,6 +6,7 @@ import {
   setGroup,
   setGroupSchedule
 } from '../../redux/modules/groupReducer'
+import { setGroupTodo } from '../../redux/modules/groupTodoReducer'
 
 export const setGroupList = token => async dispatch => {
   try {
@@ -117,6 +118,25 @@ export const getGroupSchedule =
         }
       )
       dispatch(setGroupSchedule(response.data.data))
+    } catch (error) {
+      console.error('Error fetching schedule:', error)
+      throw error
+    }
+  }
+
+export const getGroupTodo =
+  (token, groupCode, startDate, endDate) => async dispatch => {
+    try {
+      const response = await basicApi.get(
+        `/api/v1/group-rooms/planner/week/${groupCode}/${startDate}/${endDate}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        }
+      )
+      dispatch(setGroupTodo(response.data.data))
     } catch (error) {
       console.error('Error fetching schedule:', error)
       throw error

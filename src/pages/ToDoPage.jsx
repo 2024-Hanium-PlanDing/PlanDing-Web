@@ -6,7 +6,8 @@ import useFavorite from '../hooks/useFavorite'
 import { closeModal, openModal } from '../redux/modules/modalReducer'
 import useWebSocket from '../hooks/WebSocket/useWebSocket'
 import CreateTodoModal from '../components/Modal/CreateTodoModal/CreateTodoModal'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { getGroupTodo } from '../services/Group/groupController'
 
 const WEBSOCKET_URL = import.meta.env.VITE_VIEW_WEBSOCKET_URL
 
@@ -14,9 +15,28 @@ const ToDoPage = () => {
   const groupInfo = useSelector(state => state.group.groupInfo)
   const dispatch = useDispatch()
   const userInfo = useSelector(state => state.user)
+  const weekData = useSelector(state => state.date)
   const [selectedUsers, setSelectedUsers] = useState([])
+  const todoList = useSelector(state => state.groupTodo.groupTodo)
 
   const { favoriteToggle } = useFavorite(groupInfo, dispatch, userInfo)
+
+  useEffect(() => {
+    dispatch(
+      getGroupTodo(
+        userInfo.token,
+        groupInfo.data.groupCode,
+        weekData.startDate,
+        weekData.endDate
+      )
+    )
+  }, [
+    dispatch,
+    userInfo.token,
+    groupInfo.data.groupCode,
+    weekData.startDate,
+    weekData.endDate
+  ])
 
   const [todoData, setTodoData] = useState({
     title: '',
@@ -58,6 +78,17 @@ const ToDoPage = () => {
     WEBSOCKET_URL
   )
   const createTodo = () => {
+    if (
+      !todoData.title ||
+      !todoData.content ||
+      !todoData.date ||
+      !todoData.time ||
+      !todoData.status ||
+      selectedUsers.length === 0
+    ) {
+      alert('모든 필수 데이터를 입력해주세요.')
+      return
+    }
     if (client && client.active) {
       const deadline = `${todoData.date}T${todoData.time}`
       const userCodes = selectedUsers.map(user => user.userCode)
@@ -114,6 +145,7 @@ const ToDoPage = () => {
           favoriteToggle={favoriteToggle}
           groupInfo={groupInfo}
           createTodoHandler={createTodoHandler}
+          todoList={todoList}
         />
         <FavoritesContainer />
       </div>

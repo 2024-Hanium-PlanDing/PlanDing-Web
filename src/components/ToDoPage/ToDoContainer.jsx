@@ -1,8 +1,9 @@
 import MainTitle from '../ListPage/MainContent/atom/MainTitle'
 import SubTitle from '../ListPage/MainContent/atom/SubTitle'
 import Plus from '../../assets/plus.svg'
-import ToDoItem from './atom/ToDoItem'
+
 import ItemHeader from './atom/ItemHeader'
+import TodoParent from './TodoParent'
 
 const ToDoContainer = ({ favoriteToggle, groupInfo, createTodoHandler }) => {
   return (
@@ -29,7 +30,10 @@ const ToDoContainer = ({ favoriteToggle, groupInfo, createTodoHandler }) => {
           </div>
           <div className="w-[932px] h-[579px] mx-5">
             <ItemHeader />
-            <ToDoItem />
+            <div className="flex flex-col gap-2">
+              <TodoParent />
+              <TodoParent />
+            </div>
           </div>
         </div>
       </div>

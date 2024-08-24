@@ -13,7 +13,6 @@ function App() {
     <div>
       <BrowserRouter>
         <CreateGroupModal />
-
         <Routes>
           <Route
             path="/"
