@@ -1,8 +1,13 @@
 import { useEffect, useState } from 'react'
 import AlarmItem from './atom/AlarmItem'
-import { getInvitation } from '../../../services/Group/inviteController'
+import {
+  acceptInvitation,
+  declineInvitation,
+  getInvitation
+} from '../../../services/Group/inviteController'
 import { useDispatch, useSelector } from 'react-redux'
 import AlarmInvite from './atom/AlarmInvite'
+import { setGroupList } from '../../../services/Group/groupController'
 
 const AlarmModal = () => {
   const [selectedTab, setSelectedTab] = useState('초대')
@@ -10,12 +15,18 @@ const AlarmModal = () => {
 
   const userInfo = useSelector(state => state.user)
   const invitation = useSelector(state => state.invitation.invitation)
-  console.log(invitation)
+
   useEffect(() => {
     dispatch(getInvitation(userInfo.token))
   }, [userInfo.token])
 
-  console.log(invitation)
+  const acceptHandler = async (groupCode, inviteCode) => {
+    await dispatch(acceptInvitation(userInfo.token, groupCode, inviteCode))
+    await dispatch(setGroupList(userInfo.token))
+  }
+  const declineHandler = async inviteCode => {
+    await dispatch(declineInvitation(userInfo.token, inviteCode))
+  }
   const renderAlarmItems = () => {
     switch (selectedTab) {
       case '초대':
@@ -26,18 +37,23 @@ const AlarmModal = () => {
                 <AlarmInvite
                   data={data}
                   key={index}
+                  acceptHandler={acceptHandler}
+                  declineHandler={declineHandler}
                 />
               ))
             ) : (
-              <p className="text-center text-gray-500">초대 알림이 없습니다.</p>
+              <p className="text-center text-gray-500 mt-4">
+                초대 알림이 없습니다.
+              </p>
             )}
           </>
         )
-      case '스케쥴':
+      case '스케줄':
         return (
           <>
-            <AlarmItem content="스케쥴 알림 1" />
-            <AlarmItem content="스케쥴 알림 2" />
+            <p className="text-center text-gray-500 mt-4">
+              스케줄 알림이 없습니다.
+            </p>
           </>
         )
       case '그룹':
@@ -54,7 +70,7 @@ const AlarmModal = () => {
     }
   }
   return (
-    <div className="w-[280px] h-[533px] border border-black rounded-2xl shadow-lg absolute left-9 top-[144px] z-50 bg-white">
+    <div className="w-[280px] h-[533px rounded-2xl shadow-lg absolute left-9 top-[144px] z-50 bg-white">
       <div className="w-full h-[60px] p-4 rounded-t-2xl">
         <p className="text-subtitle-3 text-neutrals-900">알림</p>
       </div>
@@ -71,7 +87,7 @@ const AlarmModal = () => {
             selectedTab === '스케쥴' ? 'text-primary-300' : 'text-neutrals-90'
           }`}
           onClick={() => setSelectedTab('스케쥴')}>
-          스케쥴
+          스케줄
         </p>
         <p
           className={`text-button cursor-pointer ${
