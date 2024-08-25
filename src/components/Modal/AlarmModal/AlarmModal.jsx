@@ -1,16 +1,36 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import AlarmItem from './atom/AlarmItem'
+import { getInvitation } from '../../../services/Group/inviteController'
+import { useDispatch, useSelector } from 'react-redux'
+import AlarmInvite from './atom/AlarmInvite'
 
 const AlarmModal = () => {
-  const [selectedTab, setSelectedTab] = useState('초대') // 기본적으로 '초대' 탭이 선택됨
+  const [selectedTab, setSelectedTab] = useState('초대')
+  const dispatch = useDispatch()
+
+  const userInfo = useSelector(state => state.user)
+  const invitation = useSelector(state => state.invitation.invitation)
+  console.log(invitation)
+  useEffect(() => {
+    dispatch(getInvitation(userInfo.token))
+  }, [userInfo.token])
+
+  console.log(invitation)
   const renderAlarmItems = () => {
     switch (selectedTab) {
       case '초대':
         return (
           <>
-            <AlarmItem content="초대 알림 1" />
-            <AlarmItem content="초대 알림 2" />
-            <AlarmItem content="초대 알림 3" />
+            {invitation?.data?.length > 0 ? (
+              invitation.data.map((data, index) => (
+                <AlarmInvite
+                  data={data}
+                  key={index}
+                />
+              ))
+            ) : (
+              <p className="text-center text-gray-500">초대 알림이 없습니다.</p>
+            )}
           </>
         )
       case '스케쥴':
@@ -38,7 +58,7 @@ const AlarmModal = () => {
       <div className="w-full h-[60px] p-4 rounded-t-2xl">
         <p className="text-subtitle-3 text-neutrals-900">알림</p>
       </div>
-      <div className="w-full h-[44px] py-3 px-4 flex gap-6 border shadow-md border-t-neutrals-40 border-b-neutrals-40">
+      <div className="w-full h-[44px] py-3 px-4 flex gap-6 border border-t-neutrals-40 border-b-neutrals-40">
         <p
           className={`text-button cursor-pointer ${
             selectedTab === '초대' ? 'text-primary-300' : 'text-neutrals-90'
