@@ -54,7 +54,7 @@ const ListPage = () => {
         Accept: 'text/event-stream'
       },
       withCredentials: true,
-      heartbeatTimeout: 100000
+      heartbeatTimeout: 100000000
     })
 
     // 연결 열림 이벤트

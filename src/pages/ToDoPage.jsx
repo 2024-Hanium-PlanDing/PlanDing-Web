@@ -117,12 +117,13 @@ const ToDoPage = () => {
         content: '',
         deadline: null,
         status: '',
-        managerCode: '',
+        managerCode: userInfo.user.userInfo.userCode,
         userCodes: [],
         scheduleId: null,
         time: null,
         date: null
       })
+      setSelectedUsers([])
       closeModalHandle()
     } else {
       console.error('Client is not connected.')

@@ -1,13 +1,17 @@
 import basicApi from '..'
+import {
+  removeInvitation,
+  setInvitation
+} from '../../redux/modules/inviteReducer'
 
-export const getInvitation = async token => {
+export const getInvitation = token => async dispatch => {
   try {
     const response = await basicApi.get(`/api/v1/invitation`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
     })
-    return response
+    dispatch(setInvitation(response.data))
   } catch (error) {
     console.error(error)
   }
@@ -24,29 +28,31 @@ export const postInvitation = async (token, groupCode, userCode) => {
         Authorization: `Bearer ${token}`
       }
     })
-    return response
+    return response.data
   } catch (error) {
     console.error(error)
   }
 }
 
-export const acceptInvitation = async (token, groupCode, inviteCode) => {
-  try {
-    const response = await basicApi.get(
-      `/api/v1/invitation/accept/${groupCode}/${inviteCode}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`
+export const acceptInvitation =
+  (token, groupCode, inviteCode) => async dispatch => {
+    try {
+      const response = await basicApi.get(
+        `/api/v1/invitation/accept/${groupCode}/${inviteCode}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
         }
-      }
-    )
-    return response
-  } catch (error) {
-    console.error(error)
+      )
+      dispatch(removeInvitation(inviteCode))
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
   }
-}
 
-export const declineInvitation = async (token, inviteCode) => {
+export const declineInvitation = (token, inviteCode) => async dispatch => {
   try {
     const response = await basicApi.delete(
       `/api/v1/invitation/decline/${inviteCode}`,
@@ -56,7 +62,8 @@ export const declineInvitation = async (token, inviteCode) => {
         }
       }
     )
-    return response
+    dispatch(removeInvitation(inviteCode))
+    return response.data
   } catch (error) {
     console.error(error)
   }

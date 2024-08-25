@@ -7,6 +7,7 @@ import personalReducer from '../modules/personalReducer'
 import calendarReducer from '../modules/calendarReducer'
 import favoriteReducer from '../modules/favoriteReducer'
 import groupTodoReducer from '../modules/groupTodoReducer'
+import inviteReducer from '../modules/inviteReducer'
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
   personal: personalReducer,
   date: calendarReducer,
   favorite: favoriteReducer,
-  groupTodo: groupTodoReducer
+  groupTodo: groupTodoReducer,
+  invitation: inviteReducer
 })
 
 const store = createStore(
