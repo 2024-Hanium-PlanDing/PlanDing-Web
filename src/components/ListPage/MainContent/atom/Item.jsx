@@ -1,6 +1,7 @@
 import Default from '../../../../assets/default.svg'
 import Delete from '../../../../assets/delete.svg'
 import Leave from '../../../../assets/leave.svg'
+import Plus from '../../../../assets/plusBlack.svg'
 
 const Item = ({ onClick, data, text, userInfo, removeGroupHandler }) => {
   const isOwner = userInfo?.user.userInfo.userCode === data?.ownerCode
@@ -8,7 +9,12 @@ const Item = ({ onClick, data, text, userInfo, removeGroupHandler }) => {
   return (
     <div className="w-[223px] h-[178px] p-3 border border-[#E8E9FA] rounded-sm shadow-lg">
       {text ? (
-        <div className="w-[199px] h-[120px]  rounded-sm bg-[#B2B7FF]" />
+        <div className="w-[199px] h-[120px]  rounded-sm bg-neutrals-30 flex justify-center items-center">
+          <img
+            src={Plus}
+            alt="그룹 생성"
+          />
+        </div>
       ) : (
         <div className="relative  ">
           <img
@@ -24,7 +30,7 @@ const Item = ({ onClick, data, text, userInfo, removeGroupHandler }) => {
       )}
 
       <p
-        className={`mt-3 ml-1 text-caption ${data?.name ? 'text-neutrals-800' : 'text-[#363BC9]'} cursor-pointer`}
+        className={`mt-3 ml-1 text-caption 'text-neutrals-800' cursor-pointer`}
         onClick={onClick}>
         {data?.name ?? text}
       </p>

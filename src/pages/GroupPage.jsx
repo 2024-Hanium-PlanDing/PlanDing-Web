@@ -182,28 +182,29 @@ const GroupPage = () => {
           deleteSchedule={deleteSchedule}
           openInviteModal={openInviteModal}
         />
-        <div className="flex flex-col gap-2 items-center">
-          <FavoritesContainer />
-          <button
-            type="button"
-            onClick={toggleChatState}
-            className="w-[72px] h-[72px] bg-primary-400 flex justify-center items-center rounded-full shadow-xl">
-            <img
-              src={Chat}
-              alt="채팅"
+        <div className="relative">
+          <div className="flex flex-col gap-2 items-center">
+            <FavoritesContainer />
+            <button
+              type="button"
+              onClick={toggleChatState}
+              className="w-[72px] h-[72px] bg-primary-400 flex justify-center items-center rounded-full shadow-xl">
+              <img
+                src={Chat}
+                alt="채팅"
+              />
+            </button>
+          </div>
+          <div className="absolute right-0 bottom-20 flex flex-col items-end gap-2">
+            <ChatContainer
+              visible={chatState}
+              groupChatData={groupChatData}
+              chatData={chatData}
+              setChatData={setChatData}
+              sendChat={sendChat}
+              userCode={userInfo?.user.userInfo.userCode}
             />
-          </button>
-        </div>
-
-        <div className="absolute right-60 bottom-20 flex flex-col items-end gap-2">
-          <ChatContainer
-            visible={chatState}
-            groupChatData={groupChatData}
-            chatData={chatData}
-            setChatData={setChatData}
-            sendChat={sendChat}
-            userCode={userInfo?.user.userInfo.userCode}
-          />
+          </div>
         </div>
       </div>
     </div>

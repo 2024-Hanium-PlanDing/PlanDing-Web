@@ -10,7 +10,7 @@ const ChatContainer = ({
 }) => {
   return (
     <div
-      className={`w-[386px] h-[503px] shadow-xl ${visible ? 'visible' : 'hidden'} rounded-lg relative bg-neutral-50 z-20`}>
+      className={`w-[386px] h-[503px] shadow-xl ${visible ? 'visible' : 'hidden'} rounded-lg relative bg-neutral-20 z-20`}>
       <div className="flex flex-col gap-2.5 overflow-y-auto w-full h-[389px] mt-4 px-3 bg-neutrals-20">
         {groupChatData?.map(message => (
           <div
