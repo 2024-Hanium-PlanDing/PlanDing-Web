@@ -33,7 +33,7 @@ const TodoForm = ({ scheduleList, onChangeData, onChangeDate }) => {
           <RadioButton
             id="in-progress"
             name="status"
-            value="TODO"
+            value="IN_PROGRESS"
             label="진행중"
             onChange={onChangeData}
           />
@@ -47,7 +47,7 @@ const TodoForm = ({ scheduleList, onChangeData, onChangeDate }) => {
           <RadioButton
             id="pending"
             name="status"
-            value="IN_PROGRESS"
+            value="TODO"
             label="진행대기"
             onChange={onChangeData}
           />

@@ -5,7 +5,13 @@ import Plus from '../../assets/plus.svg'
 import ItemHeader from './atom/ItemHeader'
 import TodoParent from './TodoParent'
 
-const ToDoContainer = ({ favoriteToggle, groupInfo, createTodoHandler }) => {
+const ToDoContainer = ({
+  favoriteToggle,
+  groupInfo,
+  createTodoHandler,
+  todoList
+}) => {
+  console.log(todoList)
   return (
     <div className="w-[1012px] h-[848px] rounded-lg shadow-md p-5 bg-white">
       <div className="w-[972px] h-full flex flex-col gap-8 border-2 rounded-t-md border-neutrals-40">
@@ -30,9 +36,13 @@ const ToDoContainer = ({ favoriteToggle, groupInfo, createTodoHandler }) => {
           </div>
           <div className="w-[932px] h-[579px] mx-5">
             <ItemHeader />
-            <div className="flex flex-col gap-2">
-              <TodoParent />
-              <TodoParent />
+            <div className="w-full h-[548px] overflow-y-scroll flex flex-col gap-2">
+              {todoList?.map((data, index) => (
+                <TodoParent
+                  data={data}
+                  key={index}
+                />
+              ))}
             </div>
           </div>
         </div>
