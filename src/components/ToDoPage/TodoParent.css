@@ -1,0 +1,24 @@
+.slide-enter {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 300ms ease-out, opacity 300ms ease-out;
+  }
+  
+  .slide-enter-active {
+    max-height: 500px; /* 이 값을 목록의 최대 높이로 설정합니다 */
+    opacity: 1;
+  }
+  
+  .slide-exit {
+    max-height: 500px;
+    opacity: 1;
+    overflow: hidden;
+    transition: max-height 300ms ease-in, opacity 300ms ease-in;
+  }
+  
+  .slide-exit-active {
+    max-height: 0;
+    opacity: 0;
+  }
+  
