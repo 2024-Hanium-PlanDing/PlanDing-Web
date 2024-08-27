@@ -1,11 +1,7 @@
 import Default from '../../../../assets/default.svg'
-import Delete from '../../../../assets/delete.svg'
-import Leave from '../../../../assets/leave.svg'
 import Plus from '../../../../assets/plusBlack.svg'
 
-const Item = ({ onClick, data, text, userInfo, removeGroupHandler }) => {
-  const isOwner = userInfo?.user.userInfo.userCode === data?.ownerCode
-
+const Item = ({ onClick, data, text }) => {
   return (
     <div className="w-[223px] h-[178px] p-3 border border-[#E8E9FA] rounded-sm shadow-lg">
       {text ? (
@@ -16,15 +12,10 @@ const Item = ({ onClick, data, text, userInfo, removeGroupHandler }) => {
           />
         </div>
       ) : (
-        <div className="relative  ">
+        <div className="relative ">
           <img
             src={data?.thumbnailPath ?? Default}
             className="w-[199px] h-[120px] rounded-sm"
-          />
-          <img
-            src={isOwner ? Delete : Leave}
-            className="absolute top-1 right-1 cursor-pointer"
-            onClick={() => removeGroupHandler(isOwner, data.code)}
           />
         </div>
       )}

@@ -3,12 +3,7 @@ import ItemContainer from './ItemContainer'
 import MainTitle from './atom/MainTitle'
 import SubTitle from './atom/SubTitle'
 
-const MainContentContainer = ({
-  openModal,
-  groupData,
-  userInfo,
-  removeGroupHandler
-}) => {
+const MainContentContainer = ({ openModal, groupData, userInfo }) => {
   const nav = useNavigate(0)
   return (
     <div className="w-[1012px] h-[848px] rounded-lg shadow-md p-5 bg-white">
@@ -25,7 +20,6 @@ const MainContentContainer = ({
           groupData={groupData}
           first="그룹 생성"
           userInfo={userInfo}
-          removeGroupHandler={removeGroupHandler}
         />
       </div>
     </div>

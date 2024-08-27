@@ -4,11 +4,7 @@ import MainContentContainer from '../components/ListPage/MainContent/MainContent
 import { useDispatch, useSelector } from 'react-redux'
 import { openModal } from '../redux/modules/modalReducer'
 import { useEffect, useState } from 'react'
-import {
-  deleteGroup,
-  leaveGroup,
-  setGroupList
-} from '../services/Group/groupController'
+import { setGroupList } from '../services/Group/groupController'
 import { getFavoriteList } from '../services/Favorite/favoriteController'
 
 import { EventSourcePolyfill } from 'event-source-polyfill'
@@ -88,18 +84,6 @@ const ListPage = () => {
     }
   }, [userInfo.token])
 
-  const removeGroupHandler = async (isOwner, groupCode) => {
-    try {
-      if (isOwner) {
-        await dispatch(deleteGroup(userInfo.token, groupCode))
-      } else {
-        await dispatch(leaveGroup(userInfo.token, groupCode))
-      }
-    } catch (error) {
-      console.error(error)
-    }
-  }
-
   return (
     <div className="flex items-center justify-center w-screen h-screen bg-[#F6F6F6]">
       <div className="flex gap-2.5">
@@ -113,7 +97,6 @@ const ListPage = () => {
           openModal={openModalHandle}
           groupData={groupData?.data}
           userInfo={userInfo}
-          removeGroupHandler={removeGroupHandler}
         />
         <FavoritesContainer />
       </div>
