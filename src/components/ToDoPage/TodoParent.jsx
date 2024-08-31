@@ -9,11 +9,11 @@ const TodoParent = ({ data }) => {
   const [isOpen, setIsOpen] = useState(false) // 상태를 추가하여 슬라이드 상태 관리
 
   // 시작일과 종료일 계산
-  const getStartAndEndDate = planner => {
-    if (!planner || planner.length === 0)
+  const getStartAndEndDate = planners => {
+    if (!planners || planners.length === 0)
       return { startDate: null, endDate: null }
 
-    const dates = planner.map(item => new Date(item.deadline))
+    const dates = planners.map(item => new Date(item.deadline))
     const startDate = new Date(Math.min(...dates))
     const endDate = new Date(Math.max(...dates))
 
@@ -23,7 +23,7 @@ const TodoParent = ({ data }) => {
     }
   }
 
-  const { startDate, endDate } = getStartAndEndDate(data.planner)
+  const { startDate, endDate } = getStartAndEndDate(data.planners)
   const toggleOpen = () => {
     setIsOpen(prv => !prv)
   }
@@ -43,7 +43,7 @@ const TodoParent = ({ data }) => {
           {data.scheduleTitle}
         </div>
         <div className="w-[60px] h-full flex justify-center items-center">
-          {data.planner.length}개
+          {data.planners.length}개
         </div>
         <div className="w-[160px] h-full flex justify-center items-center">
           {startDate}
@@ -58,7 +58,7 @@ const TodoParent = ({ data }) => {
         classNames="slide"
         unmountOnExit>
         <div>
-          {data?.planner.map((data, index) => (
+          {data?.planners.map((data, index) => (
             <ToDoItem
               data={data}
               key={index}
