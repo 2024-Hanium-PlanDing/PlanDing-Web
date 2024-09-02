@@ -37,7 +37,7 @@ const ListPage = () => {
   }, [dispatch, userInfo.token])
 
   useEffect(() => {
-    if (!userInfo.token) {
+    if (!userInfo?.token) {
       console.error('No user token found')
       return
     }
@@ -82,7 +82,7 @@ const ListPage = () => {
         sse.close()
       }
     }
-  }, [userInfo.token])
+  }, [userInfo?.token])
 
   return (
     <div className="flex items-center justify-center w-screen h-screen bg-[#F6F6F6]">

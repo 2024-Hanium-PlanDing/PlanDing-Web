@@ -22,18 +22,20 @@ const ToDoPage = () => {
   const { favoriteToggle } = useFavorite(groupInfo, dispatch, userInfo)
 
   useEffect(() => {
-    dispatch(
-      getGroupTodo(
-        userInfo.token,
-        groupInfo.data.groupCode,
-        weekData.startDate,
-        weekData.endDate
+    if (userInfo.token && groupInfo?.data?.groupCode) {
+      dispatch(
+        getGroupTodo(
+          userInfo.token,
+          groupInfo.data.groupCode,
+          weekData.startDate,
+          weekData.endDate
+        )
       )
-    )
+    }
   }, [
     dispatch,
     userInfo.token,
-    groupInfo.data.groupCode,
+    groupInfo?.data?.groupCode,
     weekData.startDate,
     weekData.endDate
   ])
@@ -74,7 +76,7 @@ const ToDoPage = () => {
 
   const client = useWebSocket(
     userInfo.token,
-    groupInfo.data.groupCode,
+    groupInfo?.data?.groupCode,
     WEBSOCKET_URL
   )
   const createTodo = () => {
@@ -129,6 +131,10 @@ const ToDoPage = () => {
       console.error('Client is not connected.')
     }
   }
+  if (!groupInfo?.data) {
+    return null
+  }
+
   return (
     <div className="flex items-center justify-center w-screen h-screen bg-[#F6F6F6]">
       <div className="flex gap-2.5">

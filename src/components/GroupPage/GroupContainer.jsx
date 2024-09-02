@@ -10,7 +10,9 @@ const GroupContainer = ({
   deleteSchedule,
   openInviteModal
 }) => {
-  const [year, month] = weekData.startDate.split('-')
+  const [year, month] = weekData?.startDate
+    ? weekData.startDate.split('-')
+    : [undefined, undefined]
   const formattedDate = `${year}년 ${parseInt(month)}월`
 
   return (

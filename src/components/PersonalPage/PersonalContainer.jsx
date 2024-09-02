@@ -2,7 +2,9 @@ import MainTitle from '../ListPage/MainContent/atom/MainTitle'
 import ScheduleContainer from './Schedule/ScheduleContainer'
 
 const PersonalContainer = ({ weekData, scheduleList, deleteSchedule }) => {
-  const [year, month] = weekData.startDate.split('-')
+  const [year, month] = weekData?.startDate
+    ? weekData.startDate.split('-')
+    : [undefined, undefined]
 
   const formattedDate = `${year}년 ${parseInt(month)}월`
   return (

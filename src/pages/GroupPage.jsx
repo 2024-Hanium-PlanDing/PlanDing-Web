@@ -156,7 +156,9 @@ const GroupPage = () => {
       alert('사용자 코드를 입력할 수 없습니다.')
     }
   }
-
+  if (!userInfo || !groupInfo?.data) {
+    return null
+  }
   return (
     <div className="flex items-center justify-center w-screen h-screen bg-[#F6F6F6]">
       <InviteGroupModal
