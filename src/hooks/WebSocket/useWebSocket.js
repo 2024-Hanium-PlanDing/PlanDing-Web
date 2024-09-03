@@ -40,7 +40,7 @@ const useWebSocket = (token, code, WEBSOCKET_URL) => {
                 if (messageBody.data.type === 'GROUP') {
                   dispatch(addGroupSchedule(messageBody.data))
                 }
-                if (messageBody.data.tye === 'PLANNER') {
+                if (messageBody.data.type === 'PLANNER') {
                   dispatch(addGroupTodo(messageBody.data))
                 }
 

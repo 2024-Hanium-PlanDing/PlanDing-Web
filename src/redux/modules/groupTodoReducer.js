@@ -27,11 +27,31 @@ const groupTodoReducer = (state = initialState, action) => {
         ...state,
         groupTodo: action.payload
       }
-    case ADD_GROUP_TODO:
+    case ADD_GROUP_TODO: {
+      const { scheduleId, planner } = action.payload
+
+      const scheduleIndex = state.groupTodo.findIndex(
+        schedule => schedule.scheduleId === scheduleId
+      )
+
+      let updatedSchedules
+      if (scheduleIndex !== -1) {
+        updatedSchedules = [...state.groupTodo]
+        updatedSchedules[scheduleIndex].planners.push(planner)
+      } else {
+        updatedSchedules = [
+          ...state.groupTodo,
+          {
+            scheduleId,
+            planners: [planner]
+          }
+        ]
+      }
       return {
         ...state,
-        groupTodo: [...state.groupTodo, action.payload]
+        groupTodo: updatedSchedules
       }
+    }
     case REMOVE_GROUP_TODO:
       return {
         ...state,
