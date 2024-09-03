@@ -5,7 +5,8 @@
 
 </div>
 
-- 배포 URL : http://planding-front.s3-website.ap-northeast-2.amazonaws.com/
+- S3 배포 URL : http://planding-front.s3-website.ap-northeast-2.amazonaws.com/
+- 배포 URL : https://planding.site
 
 <br>
 
