@@ -1,6 +1,7 @@
 import MainTitle from '../ListPage/MainContent/atom/MainTitle'
 import ScheduleContainer from '../PersonalPage/Schedule/ScheduleContainer'
 import AddPerson from '../../assets/addPerson.svg'
+import ScheduleDetail from '../PersonalPage/Schedule/ScheduleDetail'
 
 const GroupContainer = ({
   weekData,
@@ -16,8 +17,8 @@ const GroupContainer = ({
   const formattedDate = `${year}년 ${parseInt(month)}월`
 
   return (
-    <div className="w-[1012px] h-[848px] rounded-lg shadow-md p-5 bg-white">
-      <div className="w-[972px] h-full flex flex-col gap-8 border-2 rounded-t-md border-neutrals-40">
+    <div className="w-[1012px] h-[848px] rounded-lg shadow-md p-5 bg-white ">
+      <div className="w-[972px] h-full flex flex-col gap-8 border-2 rounded-lg border-neutrals-40 relative">
         <div>
           <MainTitle
             text={groupInfo?.name}
@@ -46,6 +47,7 @@ const GroupContainer = ({
             deleteSchedule={deleteSchedule}
           />
         </div>
+        <ScheduleDetail />
       </div>
     </div>
   )

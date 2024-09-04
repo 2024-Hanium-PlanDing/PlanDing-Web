@@ -45,7 +45,7 @@ const ScheduleContainer = ({ weekData, scheduleList, deleteSchedule }) => {
             if (i >= 0 && i < 19) {
               newSchedule[i][dayIndex] = {
                 first: i === startHour ? 'start' : '',
-                id: i === startHour ? id : '',
+                id: id,
                 title: i === midPoint ? title : '',
                 highlight: true,
                 scheduleInfo:
@@ -64,14 +64,14 @@ const ScheduleContainer = ({ weekData, scheduleList, deleteSchedule }) => {
 
   return (
     <div className="px-5 h-full">
-      <table className="min-w-full border border-black">
+      <table className="min-w-full border border-neutrals-80">
         <thead>
           <tr>
-            <th className="border border-black p-2">Time</th>
+            <th className="border border-neutrals-80 p-2">Time</th>
             {weekDates.map((date, index) => (
               <th
                 key={index}
-                className={`border border-black p-2 ${index === 0 ? 'text-red-500' : index === 6 ? 'text-blue-500' : ''}`}>
+                className={`border border-neutrals-80 p-2 ${index === 0 ? 'text-red-500' : index === 6 ? 'text-blue-500' : ''}`}>
                 {date.getDate()}
                 <br />
                 {days[index]}
@@ -82,18 +82,25 @@ const ScheduleContainer = ({ weekData, scheduleList, deleteSchedule }) => {
         <tbody>
           {times.map((time, rowIndex) => (
             <tr key={rowIndex}>
-              <td className="w-[92px] h-[80px] border border-black p-2">
+              <td className="w-[92px] h-[80px] border border-neutrals-80 p-2">
                 {time}
               </td>
               {days.map((_, colIndex) => (
                 <td
                   key={colIndex}
-                  className={`w-[120px] h-[80px] border border-black p-2 ${schedule[rowIndex]?.[colIndex]?.highlight ? 'bg-yellow-200' : ''}`}
-                  style={{ textAlign: 'center', verticalAlign: 'middle' }}>
+                  className={`w-[120px] h-[80px] border border-neutrals-80 p-2 ${schedule[rowIndex]?.[colIndex]?.highlight ? 'bg-primary-75' : ''}`}
+                  onClick={() => alert(schedule[rowIndex]?.[colIndex]?.id)}
+                  style={{
+                    textAlign: 'center',
+                    verticalAlign: 'middle',
+                    border: schedule[rowIndex]?.[colIndex]?.highlight
+                      ? 'none'
+                      : '1px solid black'
+                  }}>
                   {schedule[rowIndex]?.[colIndex]?.title || ''}
                   {schedule[rowIndex]?.[colIndex]?.first ? (
                     <button
-                      className="border border-black"
+                      className="border border-neutrals-80"
                       onClick={() =>
                         deleteSchedule(schedule[rowIndex]?.[colIndex]?.id)
                       }>
