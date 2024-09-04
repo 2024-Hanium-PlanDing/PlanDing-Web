@@ -33,7 +33,6 @@ const GroupPage = () => {
   const groupChatData = useSelector(state => state.group.groupChat)
 
   const modalState = useSelector(state => state.modal.inviteGroupModal)
-
   const [chatState, setChatState] = useState(false)
   const [chatData, setChatData] = useState('')
   const { code } = useParams()

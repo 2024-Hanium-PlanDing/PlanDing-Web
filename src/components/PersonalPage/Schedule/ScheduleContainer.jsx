@@ -13,7 +13,7 @@ const ScheduleContainer = ({ weekData, scheduleList, deleteSchedule }) => {
     '토요일'
   ]
   const times = Array.from({ length: 19 }, (_, i) => `${6 + i}:00`)
-
+  console.log(scheduleList)
   useEffect(() => {
     if (weekData.startDate && weekData.endDate) {
       const start = new Date(weekData.startDate)
@@ -26,37 +26,36 @@ const ScheduleContainer = ({ weekData, scheduleList, deleteSchedule }) => {
       setWeekDates(dates)
     }
   }, [weekData])
-
   useEffect(() => {
     if (scheduleList && Array.isArray(scheduleList)) {
       const newSchedule = Array(19)
         .fill(null)
         .map(() => Array(7).fill(null))
 
-      scheduleList.forEach(
-        ({ scheduleDate, startTime, endTime, title, id }) => {
-          const date = new Date(scheduleDate)
-          const dayIndex = date.getDay()
-          const startHour = startTime - 6
-          const endHour = endTime - 6
-          const midPoint = Math.floor((startHour + endHour) / 2)
+      scheduleList.forEach(item => {
+        const { scheduleDate, startTime, endTime, title, id } =
+          item.scheduleCommonResponse
+        const date = new Date(scheduleDate)
+        const dayIndex = date.getDay()
+        const startHour = startTime - 6
+        const endHour = endTime - 6
+        const midPoint = Math.floor((startHour + endHour) / 2)
 
-          for (let i = startHour; i < endHour; i++) {
-            if (i >= 0 && i < 19) {
-              newSchedule[i][dayIndex] = {
-                first: i === startHour ? 'start' : '',
-                id: id,
-                title: i === midPoint ? title : '',
-                highlight: true,
-                scheduleInfo:
-                  i === midPoint
-                    ? { scheduleDate, startTime, endTime, title, id }
-                    : null
-              }
+        for (let i = startHour; i < endHour; i++) {
+          if (i >= 0 && i < 19) {
+            newSchedule[i][dayIndex] = {
+              first: i === startHour ? 'start' : '',
+              id: id,
+              title: i === midPoint ? title : '',
+              highlight: true,
+              scheduleInfo:
+                i === midPoint
+                  ? { scheduleDate, startTime, endTime, title, id }
+                  : null
             }
           }
         }
-      )
+      })
 
       setSchedule(newSchedule)
     }

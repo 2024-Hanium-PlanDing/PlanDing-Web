@@ -37,21 +37,33 @@ const useWebSocket = (token, code, WEBSOCKET_URL) => {
             console.log(messageBody)
             switch (messageBody.data.action) {
               case 'CREATE':
-                if (messageBody.data.type === 'GROUP') {
-                  dispatch(addGroupSchedule(messageBody.data))
-                }
-                if (messageBody.data.type === 'PLANNER') {
-                  dispatch(addGroupTodo(messageBody.data))
-                }
-
+                dispatch(addGroupSchedule(messageBody.data))
                 break
               case 'DELETE':
-                if (messageBody.data.type === 'GROUP') {
-                  dispatch(removeGroupSchedule(messageBody.data.id))
-                }
-                if (messageBody.data.type === 'PLANNER') {
-                  dispatch(removeGroupTodo(messageBody.data.id))
-                }
+                dispatch(
+                  removeGroupSchedule(
+                    messageBody.data.scheduleCommonResponse.id
+                  )
+                )
+                break
+              default:
+                console.warn('Unknown action:', messageBody.data.action)
+            }
+          },
+          { Authorization: `Bearer ${token}` }
+        )
+        stompClient.subscribe(
+          `/sub/planner/${code}`,
+          message => {
+            const messageBody = JSON.parse(message.body)
+            console.log(messageBody)
+            switch (messageBody.data.action) {
+              case 'CREATE':
+                dispatch(addGroupTodo(messageBody.data))
+                break
+              case 'DELETE':
+                dispatch(removeGroupTodo(messageBody.data.id))
+
                 break
               default:
                 console.warn('Unknown action:', messageBody.data.action)

@@ -111,7 +111,7 @@ const groupReducer = (state = initialState, action) => {
       return {
         ...state,
         groupSchedule: state.groupSchedule.filter(
-          schedule => schedule.id !== action.payload
+          schedule => schedule.scheduleCommonResponse.id !== action.payload
         )
       }
     case ADD_GROUP_CAHT:
