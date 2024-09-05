@@ -32,6 +32,7 @@ const ListPage = () => {
         console.error('Error fetching data:', error)
         if (error.response?.status === 401) {
           localStorage.removeItem('token')
+          window.location.reload()
         }
       }
     }
