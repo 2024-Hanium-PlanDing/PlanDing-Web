@@ -22,22 +22,23 @@ const ListPage = () => {
     dispatch(openModal('createGroupModal'))
   }
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        dispatch(setGroupList(userInfo.token))
-        dispatch(getFavoriteList(userInfo.token))
-        const data = await getTodaySchedule(userInfo.token)
-        setTodaySchedule(data)
-      } catch (error) {
-        console.error('Error fetching data:', error)
-        if (error.response?.status === 401) {
-          localStorage.removeItem('token')
-          window.location.reload()
+    if (userInfo?.token) {
+      const fetchData = async () => {
+        try {
+          dispatch(setGroupList(userInfo.token))
+          dispatch(getFavoriteList(userInfo.token))
+          const data = await getTodaySchedule(userInfo.token)
+          setTodaySchedule(data)
+        } catch (error) {
+          console.error('Error fetching data:', error)
+          if (error.response?.status === 401) {
+            localStorage.removeItem('token')
+            window.location.reload()
+          }
         }
       }
+      fetchData()
     }
-
-    fetchData()
   }, [dispatch, userInfo.token])
 
   useEffect(() => {
