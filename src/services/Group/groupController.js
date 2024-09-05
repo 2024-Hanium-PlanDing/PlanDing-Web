@@ -124,6 +124,24 @@ export const getGroupSchedule =
     }
   }
 
+export const getGroupDetailSchedule = async (token, groupCode, scheduleId) => {
+  try {
+    const response = await basicApi.get(
+      `/api/v1/group-rooms/${groupCode}/${scheduleId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      }
+    )
+    return response.data
+  } catch (error) {
+    console.error('Error fetching schedule:', error)
+    throw error
+  }
+}
+
 export const getGroupTodo =
   (token, groupCode, startDate, endDate) => async dispatch => {
     try {

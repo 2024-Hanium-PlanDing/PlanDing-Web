@@ -2,6 +2,7 @@ import MainTitle from '../ListPage/MainContent/atom/MainTitle'
 import ScheduleContainer from '../PersonalPage/Schedule/ScheduleContainer'
 import AddPerson from '../../assets/addPerson.svg'
 import ScheduleDetail from '../PersonalPage/Schedule/ScheduleDetail'
+import { useState } from 'react'
 
 const GroupContainer = ({
   weekData,
@@ -9,12 +10,14 @@ const GroupContainer = ({
   groupInfo,
   favoriteToggle,
   deleteSchedule,
-  openInviteModal
+  openInviteModal,
+  token
 }) => {
   const [year, month] = weekData?.startDate
     ? weekData.startDate.split('-')
     : [undefined, undefined]
   const formattedDate = `${year}년 ${parseInt(month)}월`
+  const [selectData, SetSelectData] = useState()
 
   return (
     <div className="w-[1012px] h-[848px] rounded-lg shadow-md p-5 bg-white ">
@@ -44,10 +47,15 @@ const GroupContainer = ({
           <ScheduleContainer
             weekData={weekData}
             scheduleList={scheduleList}
-            deleteSchedule={deleteSchedule}
+            SetSelectData={SetSelectData}
           />
         </div>
-        <ScheduleDetail />
+        <ScheduleDetail
+          selectData={selectData}
+          groupCode={groupInfo.groupCode}
+          token={token}
+          deleteSchedule={deleteSchedule}
+        />
       </div>
     </div>
   )

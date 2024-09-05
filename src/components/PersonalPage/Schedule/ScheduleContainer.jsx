@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-const ScheduleContainer = ({ weekData, scheduleList, deleteSchedule }) => {
+const ScheduleContainer = ({ weekData, scheduleList, SetSelectData }) => {
   const [schedule, setSchedule] = useState([])
   const [weekDates, setWeekDates] = useState([])
   const days = [
@@ -88,7 +88,9 @@ const ScheduleContainer = ({ weekData, scheduleList, deleteSchedule }) => {
                 <td
                   key={colIndex}
                   className={`w-[120px] h-[80px] border border-neutrals-80 p-2 ${schedule[rowIndex]?.[colIndex]?.highlight ? 'bg-primary-75' : ''}`}
-                  onClick={() => alert(schedule[rowIndex]?.[colIndex]?.id)}
+                  onClick={() =>
+                    SetSelectData(schedule[rowIndex]?.[colIndex]?.id)
+                  }
                   style={{
                     textAlign: 'center',
                     verticalAlign: 'middle',
@@ -97,17 +99,6 @@ const ScheduleContainer = ({ weekData, scheduleList, deleteSchedule }) => {
                       : '1px solid black'
                   }}>
                   {schedule[rowIndex]?.[colIndex]?.title || ''}
-                  {schedule[rowIndex]?.[colIndex]?.first ? (
-                    <button
-                      className="border border-neutrals-80"
-                      onClick={() =>
-                        deleteSchedule(schedule[rowIndex]?.[colIndex]?.id)
-                      }>
-                      삭제
-                    </button>
-                  ) : (
-                    ''
-                  )}
                 </td>
               ))}
             </tr>
