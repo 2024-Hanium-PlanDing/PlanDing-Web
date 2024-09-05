@@ -13,7 +13,7 @@ const ScheduleContainer = ({ weekData, scheduleList, deleteSchedule }) => {
     '토요일'
   ]
   const times = Array.from({ length: 19 }, (_, i) => `${6 + i}:00`)
-  console.log(scheduleList)
+
   useEffect(() => {
     if (weekData.startDate && weekData.endDate) {
       const start = new Date(weekData.startDate)

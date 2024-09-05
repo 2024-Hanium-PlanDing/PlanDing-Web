@@ -31,9 +31,9 @@ const SelectTodo = ({ scheduleList, onChangeData }) => {
           }}>
           {scheduleList.map((data, index) => (
             <MenuItem
-              value={data.id}
+              value={data.scheduleCommonResponse.id}
               key={index}>
-              {data.title}
+              {data.scheduleCommonResponse.title}
             </MenuItem>
           ))}
         </Select>

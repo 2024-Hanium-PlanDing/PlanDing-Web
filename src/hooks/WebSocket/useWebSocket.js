@@ -34,7 +34,6 @@ const useWebSocket = (token, code, WEBSOCKET_URL) => {
           `/sub/schedule/${code}`,
           message => {
             const messageBody = JSON.parse(message.body)
-            console.log(messageBody)
             switch (messageBody.data.action) {
               case 'CREATE':
                 dispatch(addGroupSchedule(messageBody.data))
@@ -56,7 +55,6 @@ const useWebSocket = (token, code, WEBSOCKET_URL) => {
           `/sub/planner/${code}`,
           message => {
             const messageBody = JSON.parse(message.body)
-            console.log(messageBody)
             switch (messageBody.data.action) {
               case 'CREATE':
                 dispatch(addGroupTodo(messageBody.data))

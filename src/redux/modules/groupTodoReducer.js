@@ -28,8 +28,9 @@ const groupTodoReducer = (state = initialState, action) => {
         groupTodo: action.payload
       }
     case ADD_GROUP_TODO: {
-      const { scheduleId, planner } = action.payload
-
+      const { planner } = action.payload
+      const item = action.payload.planner
+      const { scheduleId } = item
       const scheduleIndex = state.groupTodo.findIndex(
         schedule => schedule.scheduleId === scheduleId
       )
