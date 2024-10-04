@@ -20,7 +20,6 @@ const LoginProgressPage = () => {
   const handleLogin = async token => {
     try {
       await dispatch(UserInfo(token))
-      await localStorage.setItem('token', token)
       navigate('/list')
     } catch (error) {
       console.log(error)

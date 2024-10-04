@@ -1,6 +1,5 @@
 const LogoutBtn = () => {
   const logOut = () => {
-    localStorage.removeItem('token')
     alert('로그아웃')
     window.location.reload()
   }

@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import LoginPage from './pages/LoginPage'
 import ListPage from './pages/ListPage'
 import PersonalPage from './pages/PersonalPage'
@@ -7,23 +7,8 @@ import './App.css'
 import LoginProgressPage from './pages/LoginProgressPage'
 import CreateGroupModal from './components/Modal/CreateGroupModal/CreateGroupModal'
 import ToDoPage from './pages/ToDoPage'
-import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import { UserInfo } from './services/User/userController'
 
 function App() {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-
-  useEffect(() => {
-    const token = localStorage.getItem('token')
-    if (token) {
-      dispatch(UserInfo(token))
-      navigate('/list')
-    } else {
-      navigate('/')
-    }
-  }, [])
   return (
     <div>
       <CreateGroupModal />
