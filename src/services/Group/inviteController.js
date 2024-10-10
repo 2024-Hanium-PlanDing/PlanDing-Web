@@ -4,63 +4,44 @@ import {
   setInvitation
 } from '../../redux/modules/inviteReducer'
 
-export const getInvitation = token => async dispatch => {
+export const getInvitation = () => async dispatch => {
   try {
-    const response = await basicApi.get(`/api/v1/invitation`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
+    const response = await basicApi.get(`/api/v1/invitation`)
     dispatch(setInvitation(response.data))
   } catch (error) {
     console.error(error)
   }
 }
 
-export const postInvitation = async (token, groupCode, userCode) => {
+export const postInvitation = async (groupCode, userCode) => {
   const data = {
     groupCode,
     userCode
   }
   try {
-    const response = await basicApi.post(`/api/v1/invitation`, data, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
+    const response = await basicApi.post(`/api/v1/invitation`, data)
     return response.data
   } catch (error) {
     console.error(error)
   }
 }
 
-export const acceptInvitation =
-  (token, groupCode, inviteCode) => async dispatch => {
-    try {
-      const response = await basicApi.get(
-        `/api/v1/invitation/accept/${groupCode}/${inviteCode}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        }
-      )
-      dispatch(removeInvitation(inviteCode))
-      return response.data
-    } catch (error) {
-      console.error(error)
-    }
+export const acceptInvitation = (groupCode, inviteCode) => async dispatch => {
+  try {
+    const response = await basicApi.get(
+      `/api/v1/invitation/accept/${groupCode}/${inviteCode}`
+    )
+    dispatch(removeInvitation(inviteCode))
+    return response.data
+  } catch (error) {
+    console.error(error)
   }
+}
 
-export const declineInvitation = (token, inviteCode) => async dispatch => {
+export const declineInvitation = inviteCode => async dispatch => {
   try {
     const response = await basicApi.delete(
-      `/api/v1/invitation/decline/${inviteCode}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      }
+      `/api/v1/invitation/decline/${inviteCode}`
     )
     dispatch(removeInvitation(inviteCode))
     return response.data

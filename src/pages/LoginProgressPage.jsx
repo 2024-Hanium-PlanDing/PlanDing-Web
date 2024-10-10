@@ -19,7 +19,7 @@ const LoginProgressPage = () => {
   }, [location.search])
   const handleLogin = async token => {
     try {
-      await UserToken(token)
+      await dispatch(UserToken(token))
       await dispatch(UserInfo())
       navigate('/list')
     } catch (error) {

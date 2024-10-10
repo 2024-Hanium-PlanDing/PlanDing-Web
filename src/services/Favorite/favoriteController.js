@@ -1,14 +1,9 @@
 import basicApi from '..'
 import { setFavorite } from '../../redux/modules/favoriteReducer'
 
-export const getFavoriteList = token => async dispatch => {
+export const getFavoriteList = () => async dispatch => {
   try {
-    const response = await basicApi.get(`/api/v1/favorite`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      }
-    })
+    const response = await basicApi.get(`/api/v1/favorite`)
 
     dispatch(setFavorite(response.data))
   } catch (error) {
@@ -16,19 +11,13 @@ export const getFavoriteList = token => async dispatch => {
     throw error
   }
 }
-export const postFavorite = (token, groupCode) => async dispatch => {
+export const postFavorite = groupCode => async dispatch => {
   try {
     const response = await basicApi.post(
       `/api/v1/favorite/${groupCode}`,
-      null, // 바디가 없는 경우 null로 전달
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
-      }
+      null // 바디가 없는 경우 null로 전달
     )
-    dispatch(getFavoriteList(token))
+    dispatch(getFavoriteList())
     return response.data
   } catch (error) {
     console.error('Error:', error)
@@ -36,15 +25,10 @@ export const postFavorite = (token, groupCode) => async dispatch => {
   }
 }
 
-export const deleteFavorite = (token, groupCode) => async dispatch => {
+export const deleteFavorite = groupCode => async dispatch => {
   try {
-    const response = await basicApi.delete(`/api/v1/favorite/${groupCode}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      }
-    })
-    dispatch(getFavoriteList(token))
+    const response = await basicApi.delete(`/api/v1/favorite/${groupCode}`)
+    dispatch(getFavoriteList())
     return response.data
   } catch (error) {
     console.error('Error:', error)

@@ -8,11 +8,12 @@ import {
 } from '../../redux/modules/groupReducer'
 import { setGroupTodo } from '../../redux/modules/groupTodoReducer'
 
-export const setGroupList = token => async dispatch => {
+export const setGroupList = () => async dispatch => {
   try {
-    const response = await basicApi.get(`/api/v1/group`, {
-      headers: {
-        Authorization: `Bearer ${token}`
+    const response = await basicApi.get(`/api/v1/group/paging`, {
+      params: {
+        page: 0,
+        size: 12
       }
     })
     dispatch(setGroup(response.data))
@@ -22,48 +23,38 @@ export const setGroupList = token => async dispatch => {
   }
 }
 
-export const createGroupList =
-  (token, title, description, file) => async dispatch => {
-    try {
-      const formData = new FormData()
-      let variables = {
-        name: title,
-        description: description
-      }
-
-      formData.append(
-        'request',
-        new Blob([JSON.stringify(variables)], { type: 'application/json' })
-      )
-      formData.append('thumbnail', file)
-
-      const response = await basicApi.post('/api/v1/group', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${token}`
-        }
-      })
-
-      dispatch(createGroup(response.data.data))
-      return response.data
-    } catch (error) {
-      console.error(
-        'Error adding group:',
-        error.response ? error.response.data : error.message
-      )
-      throw error
+export const createGroupList = (title, description, file) => async dispatch => {
+  try {
+    const formData = new FormData()
+    let variables = {
+      name: title,
+      description: description
     }
+
+    formData.append(
+      'request',
+      new Blob([JSON.stringify(variables)], { type: 'application/json' })
+    )
+    formData.append('thumbnail', file)
+
+    const response = await basicApi.post('/api/v1/group', formData)
+
+    dispatch(createGroup(response.data.data))
+    return response.data
+  } catch (error) {
+    console.error(
+      'Error adding group:',
+      error.response ? error.response.data : error.message
+    )
+    throw error
   }
+}
 
 // 그룹 삭제
 
-export const deleteGroup = (token, groupCode) => async dispatch => {
+export const deleteGroup = groupCode => async dispatch => {
   try {
-    const response = await basicApi.delete(`/api/v1/group/${groupCode}`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
+    const response = await basicApi.delete(`/api/v1/group/${groupCode}`, {})
 
     dispatch(removeGroup(groupCode))
     return response.data
@@ -75,13 +66,12 @@ export const deleteGroup = (token, groupCode) => async dispatch => {
 
 //그룹 나가기
 
-export const leaveGroup = (token, groupCode) => async dispatch => {
+export const leaveGroup = groupCode => async dispatch => {
   try {
-    const response = await basicApi.delete(`/api/v1/group/leave/${groupCode}`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
+    const response = await basicApi.delete(
+      `/api/v1/group/leave/${groupCode}`,
+      {}
+    )
 
     dispatch(removeGroup(groupCode))
     return response.data
@@ -91,13 +81,9 @@ export const leaveGroup = (token, groupCode) => async dispatch => {
   }
 }
 
-export const getGroupInfo = (token, groupCode) => async dispatch => {
+export const getGroupInfo = groupCode => async dispatch => {
   try {
-    const response = await basicApi.get(`/api/v1/group/${groupCode}`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
+    const response = await basicApi.get(`/api/v1/group/${groupCode}`)
     dispatch(groupInfo(response.data))
   } catch (error) {
     console.error('Error:', error)
@@ -106,16 +92,10 @@ export const getGroupInfo = (token, groupCode) => async dispatch => {
 }
 
 export const getGroupSchedule =
-  (token, groupCode, startDate, endDate) => async dispatch => {
+  (groupCode, startDate, endDate) => async dispatch => {
     try {
       const response = await basicApi.get(
-        `/api/v1/group-rooms/week/${groupCode}/${startDate}/${endDate}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          }
-        }
+        `/api/v1/group-rooms/week/${groupCode}/${startDate}/${endDate}`
       )
       dispatch(setGroupSchedule(response.data.data))
     } catch (error) {
@@ -124,16 +104,10 @@ export const getGroupSchedule =
     }
   }
 
-export const getGroupDetailSchedule = async (token, groupCode, scheduleId) => {
+export const getGroupDetailSchedule = async (groupCode, scheduleId) => {
   try {
     const response = await basicApi.get(
-      `/api/v1/group-rooms/${groupCode}/${scheduleId}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
-      }
+      `/api/v1/group-rooms/${groupCode}/${scheduleId}`
     )
     return response.data
   } catch (error) {
@@ -143,16 +117,10 @@ export const getGroupDetailSchedule = async (token, groupCode, scheduleId) => {
 }
 
 export const getGroupTodo =
-  (token, groupCode, startDate, endDate) => async dispatch => {
+  (groupCode, startDate, endDate) => async dispatch => {
     try {
       const response = await basicApi.get(
-        `/api/v1/group-rooms/planner/week/${groupCode}/${startDate}/${endDate}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          }
-        }
+        `/api/v1/group-rooms/planner/week/${groupCode}/${startDate}/${endDate}`
       )
       dispatch(setGroupTodo(response.data.data))
     } catch (error) {

@@ -25,9 +25,9 @@ const ListPage = () => {
     if (userInfo?.token) {
       const fetchData = async () => {
         try {
-          dispatch(setGroupList(userInfo.token))
-          dispatch(getFavoriteList(userInfo.token))
-          const data = await getTodaySchedule(userInfo.token)
+          dispatch(setGroupList())
+          dispatch(getFavoriteList())
+          const data = await getTodaySchedule()
           setTodaySchedule(data)
         } catch (error) {
           console.error('Error fetching data:', error)
@@ -51,7 +51,7 @@ const ListPage = () => {
         Accept: 'text/event-stream'
       },
       withCredentials: true,
-      heartbeatTimeout: 100000000
+      heartbeatTimeout: 1000000
     })
 
     // 연결 열림 이벤트

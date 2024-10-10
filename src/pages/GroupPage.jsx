@@ -54,14 +54,7 @@ const GroupPage = () => {
   const client = useWebSocket(userInfo.token, code, WEBSOCKET_URL)
 
   useEffect(() => {
-    dispatch(
-      getGroupSchedule(
-        userInfo.token,
-        code,
-        weekData.startDate,
-        weekData.endDate
-      )
-    )
+    dispatch(getGroupSchedule(code, weekData.startDate, weekData.endDate))
   }, [weekData.startDate, weekData.endDate, code])
 
   const sendMessage = () => {
