@@ -25,7 +25,6 @@ const ToDoPage = () => {
     if (userInfo.token && groupInfo?.data?.groupCode) {
       dispatch(
         getGroupTodo(
-          userInfo.token,
           groupInfo.data.groupCode,
           weekData.startDate,
           weekData.endDate

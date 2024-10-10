@@ -25,11 +25,11 @@ const PersonalPage = () => {
   } = useSchedule()
 
   useEffect(() => {
-    dispatch(getPersonalSchedule(token, weekData.startDate, weekData.endDate))
+    dispatch(getPersonalSchedule(weekData.startDate, weekData.endDate))
   }, [token, weekData])
 
   const createSchedule = () => {
-    dispatch(postPersonalSchedule(token, scheduleData))
+    dispatch(postPersonalSchedule(scheduleData))
     setScheduleData({
       title: '',
       content: '',
@@ -39,7 +39,7 @@ const PersonalPage = () => {
     })
   }
   const deleteSchedule = id => {
-    dispatch(deletePersonalSchedule(token, id))
+    dispatch(deletePersonalSchedule(id))
   }
 
   return (

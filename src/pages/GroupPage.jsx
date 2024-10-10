@@ -48,7 +48,7 @@ const GroupPage = () => {
       console.error('User is not authenticated')
       return
     }
-    dispatch(getGroupInfo(userInfo.token, code))
+    dispatch(getGroupInfo(code))
   }, [userInfo.token, code, dispatch])
 
   const client = useWebSocket(userInfo.token, code, WEBSOCKET_URL)
@@ -115,7 +115,7 @@ const GroupPage = () => {
   }
   const sendChat = async () => {
     if (chatData) {
-      await postChat(userInfo.token, chatData, code)
+      await postChat(chatData, code)
       setChatData('')
     }
   }
@@ -134,11 +134,7 @@ const GroupPage = () => {
         return
       }
       try {
-        await postInvitation(
-          userInfo?.token,
-          groupInfo.data.groupCode,
-          userCode
-        )
+        await postInvitation(groupInfo.data.groupCode, userCode)
         alert('초대 했습니다.')
         closeModalHandle()
       } catch (error) {

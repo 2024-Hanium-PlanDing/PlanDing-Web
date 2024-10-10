@@ -17,15 +17,15 @@ const AlarmModal = () => {
   const invitation = useSelector(state => state.invitation.invitation)
 
   useEffect(() => {
-    dispatch(getInvitation(userInfo.token))
+    dispatch(getInvitation())
   }, [userInfo.token])
 
   const acceptHandler = async (groupCode, inviteCode) => {
-    await dispatch(acceptInvitation(userInfo.token, groupCode, inviteCode))
-    await dispatch(setGroupList(userInfo.token))
+    await dispatch(acceptInvitation(groupCode, inviteCode))
+    await dispatch(setGroupList())
   }
   const declineHandler = async inviteCode => {
-    await dispatch(declineInvitation(userInfo.token, inviteCode))
+    await dispatch(declineInvitation(inviteCode))
   }
   const renderAlarmItems = () => {
     switch (selectedTab) {

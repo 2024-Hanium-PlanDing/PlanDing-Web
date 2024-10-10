@@ -33,8 +33,7 @@ const ScheduleContainer = ({ weekData, scheduleList, SetSelectData }) => {
         .map(() => Array(7).fill(null))
 
       scheduleList.forEach(item => {
-        const { scheduleDate, startTime, endTime, title, id } =
-          item.scheduleCommonResponse
+        const { scheduleDate, startTime, endTime, title, id } = item
         const date = new Date(scheduleDate)
         const dayIndex = date.getDay()
         const startHour = startTime - 6

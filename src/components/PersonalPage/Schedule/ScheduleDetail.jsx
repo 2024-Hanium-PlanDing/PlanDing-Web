@@ -8,11 +8,7 @@ const ScheduleDetail = ({ selectData, groupCode, token, deleteSchedule }) => {
     const fetchData = async () => {
       if (selectData) {
         try {
-          const result = await getGroupDetailSchedule(
-            token,
-            groupCode,
-            selectData
-          )
+          const result = await getGroupDetailSchedule(groupCode, selectData)
           setData(result.data)
         } catch (error) {
           console.error('Failed to fetch data', error)

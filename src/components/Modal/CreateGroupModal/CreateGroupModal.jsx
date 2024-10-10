@@ -10,7 +10,6 @@ import SelectBox from '../SelectBox'
 const CreateGroupModal = () => {
   const dispatch = useDispatch()
   const modalState = useSelector(state => state.modal.createGroupModal)
-  const userInfo = useSelector(state => state.user)
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [file, setFile] = useState(null)
@@ -22,9 +21,7 @@ const CreateGroupModal = () => {
   const handleSubmit = async () => {
     if (file) {
       try {
-        await dispatch(
-          createGroupList(userInfo.token, title, description, file)
-        )
+        await dispatch(createGroupList(title, description, file))
         dispatch(closeModal('createGroupModal'))
         setTitle('')
         setDescription('')

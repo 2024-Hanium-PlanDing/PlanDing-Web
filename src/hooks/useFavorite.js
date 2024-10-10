@@ -4,7 +4,7 @@ import {
   postFavorite
 } from '../services/Favorite/favoriteController'
 
-const useFavorite = (groupInfo, dispatch, userInfo) => {
+const useFavorite = (groupInfo, dispatch) => {
   const favoriteToggle = async () => {
     try {
       if (groupInfo.data.isFavorite) {
@@ -19,7 +19,7 @@ const useFavorite = (groupInfo, dispatch, userInfo) => {
   }
   const addFavoriteEvent = async () => {
     try {
-      await dispatch(postFavorite(userInfo.token, groupInfo.data.groupCode))
+      await dispatch(postFavorite(groupInfo.data.groupCode))
       alert('즐겨찾기 추가')
     } catch (error) {
       console.error('즐겨찾기 추가 중 오류 발생:', error)
@@ -27,7 +27,7 @@ const useFavorite = (groupInfo, dispatch, userInfo) => {
   }
   const deleteFavoriteEvent = async () => {
     try {
-      await dispatch(deleteFavorite(userInfo.token, groupInfo.data.groupCode))
+      await dispatch(deleteFavorite(groupInfo.data.groupCode))
       alert('즐겨찾기 삭제')
     } catch (error) {
       console.error('즐겨찾기 추가 중 오류 발생:', error)
