@@ -7,4 +7,19 @@ const basicApi = axios.create({
   headers: { 'Content-Type': 'application/json;charset=utf-8' }
 })
 
+basicApi.interceptors.request.use(
+  config => {
+    const accessToken = localStorage.getItem('access-token')
+
+    if (accessToken) {
+      config.headers['Authorization'] = `Bearer ${accessToken}`
+    }
+
+    return config
+  },
+  error => {
+    return Promise.reject(error)
+  }
+)
+
 export default basicApi

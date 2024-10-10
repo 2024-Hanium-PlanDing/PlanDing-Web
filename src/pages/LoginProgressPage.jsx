@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import Progress from '../components/LoginProgressPage/Progress'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { UserInfo } from '../services/User/userController'
+import { UserInfo, UserToken } from '../services/User/userController'
 
 const LoginProgressPage = () => {
   const location = useLocation()
@@ -11,7 +11,7 @@ const LoginProgressPage = () => {
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search)
-    const token = queryParams.get('accessToken')
+    const token = queryParams.get('temporary')
 
     if (token) {
       handleLogin(token)
@@ -19,7 +19,8 @@ const LoginProgressPage = () => {
   }, [location.search])
   const handleLogin = async token => {
     try {
-      await dispatch(UserInfo(token))
+      await UserToken(token)
+      await dispatch(UserInfo())
       navigate('/list')
     } catch (error) {
       console.log(error)
