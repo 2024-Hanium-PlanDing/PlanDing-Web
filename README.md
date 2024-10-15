@@ -5,6 +5,7 @@
 
 </div>
 
+- 프로젝트 소개 영상 : https://youtu.be/a1mq1rUVoYg
 - S3 배포 URL : http://planding-front.s3-website.ap-northeast-2.amazonaws.com/
 - 배포 URL : https://planding.site
 
@@ -200,6 +201,38 @@
 <br>
 
 ## 7. 페이지별 기능
+
+
+
+#1. 그룹 생성
+
+https://github.com/user-attachments/assets/3f4ad64c-07df-42cb-a880-5db54e0a4fd1
+
+#2. 그룹 초대 하기
+
+https://github.com/user-attachments/assets/138bac15-f8ef-4ec9-b778-72b5efc884c9
+
+
+#3. 그룹 초대 받기
+
+https://github.com/user-attachments/assets/0051fb43-01ca-4f72-bfe0-f6f7cad9ed5f
+
+#4. 그룹 채팅
+
+https://github.com/user-attachments/assets/2c9971f4-a4d0-4972-9e8a-e59c107dc143
+
+#5. 스케줄 생성
+
+https://github.com/user-attachments/assets/29ef403b-fe85-4174-841b-5858048d6725
+
+#6. 플래너 생성 
+
+https://github.com/user-attachments/assets/6ff7ad38-02f3-4e72-8dc3-628a8accbca7
+
+
+
+
+
 
 
 <br>
