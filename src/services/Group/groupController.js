@@ -7,6 +7,7 @@ import {
   setGroupSchedule
 } from '../../redux/modules/groupReducer'
 import { setGroupTodo } from '../../redux/modules/groupTodoReducer'
+import { normalizeFileName } from '../../utils/normalizeFileName'
 
 export const setGroupList = () => async dispatch => {
   try {
@@ -35,7 +36,10 @@ export const createGroupList = (title, description, file) => async dispatch => {
       'request',
       new Blob([JSON.stringify(variables)], { type: 'application/json' })
     )
-    formData.append('thumbnail', file)
+    const normalizedFile = new File([file], normalizeFileName(file), {
+      type: file.type
+    })
+    formData.append('thumbnail', normalizedFile)
 
     const response = await basicApi.post('/api/v1/group', formData)
 
